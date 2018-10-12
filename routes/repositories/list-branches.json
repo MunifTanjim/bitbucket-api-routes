@@ -1,0 +1,72 @@
+{
+  "apiName": "List Branches",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a list of all open branches within the specified repository.\nResults will be in the order the source control manager returns them.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/branches#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": " This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": " This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": " Query string to narrow down the response as per [filtering and sorting](../../../../../../meta/filtering).",
+      "in": "query",
+      "name": "q",
+      "type": "string"
+    },
+    {
+      "description": " Field by which the results should be sorted as per [filtering and sorting](../../../../../../meta/filtering). The `name` field is handled specially for branches in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return ['branch1', 'branch2', 'branch10'] instead of ['branch1', 'branch10', 'branch2'].",
+      "in": "query",
+      "name": "sort",
+      "type": "string"
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/refs/branches",
+  "responses": {
+    "200": {
+      "description": "A paginated list of branches matching any filter criteria that were provided.",
+      "schema": {
+        "$ref": "#/definitions/paginated_branches"
+      }
+    },
+    "403": {
+      "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The specified repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

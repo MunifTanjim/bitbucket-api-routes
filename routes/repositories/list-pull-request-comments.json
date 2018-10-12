@@ -1,0 +1,74 @@
+{
+  "apiName": "List Pull Request Comments",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a paginated list of the pull request's comments.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests/%7Bpull_request_id%7D/comments#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The id of the pull request.",
+      "in": "path",
+      "name": "pull_request_id",
+      "required": true,
+      "type": "integer"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "pull_request_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments",
+  "responses": {
+    "200": {
+      "description": "A paginated list of comments made on the given pull request, in reverse chronological order.",
+      "schema": {
+        "$ref": "#/definitions/paginated_pullrequest_comments"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user does not have access to the pull request.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the pull request does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

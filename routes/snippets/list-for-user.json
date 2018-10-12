@@ -1,0 +1,52 @@
+{
+  "apiName": "List For User",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Identical to `/snippets`, except that the result is further filtered\nby the snippet owner and only those that are owned by `{username}` are\nreturned.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "Filter down the result based on the authenticated user's role (`owner`, `contributor`, or `member`).",
+      "enum": [
+        "owner",
+        "contributor",
+        "member"
+      ],
+      "in": "query",
+      "name": "role",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "Limits the result to snippets owned by this user.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}",
+  "responses": {
+    "200": {
+      "description": "A paginated list of snippets.",
+      "schema": {
+        "$ref": "#/definitions/paginated_snippets"
+      }
+    },
+    "404": {
+      "description": "If the user does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "apiName": "Get Authed User",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the currently logged in user.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user#get",
+  "method": "GET",
+  "parameters": [],
+  "path": "/user",
+  "responses": {
+    "200": {
+      "description": "The current user.",
+      "examples": {
+        "application/json": {
+          "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+          "account_status": "active",
+          "created_on": "2018-06-20T23:17:33.616037+00:00",
+          "display_name": "Example Username",
+          "is_staff": false,
+          "links": {
+            "avatar": {
+              "href": "https://bitbucket.org/account/example-username/avatar/"
+            },
+            "followers": {
+              "href": "https://api.bitbucket.org/2.0/users/example-username/followers"
+            },
+            "following": {
+              "href": "https://api.bitbucket.org/2.0/users/example-username/following"
+            },
+            "html": {
+              "href": "https://bitbucket.org/example-username/"
+            },
+            "repositories": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username"
+            },
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/users/example-username"
+            },
+            "snippets": {
+              "href": "https://api.bitbucket.org/2.0/snippets/example-username"
+            }
+          },
+          "location": null,
+          "nickname": "example-username",
+          "type": "user",
+          "username": "example-username",
+          "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}",
+          "website": null
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/user"
+      }
+    },
+    "401": {
+      "description": "When the request wasn't authenticated.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

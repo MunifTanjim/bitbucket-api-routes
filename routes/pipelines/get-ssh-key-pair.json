@@ -1,0 +1,41 @@
+{
+  "apiName": "Get Ssh Key Pair",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve the repository SSH key pair excluding the SSH private key. The private key is a write only field and will never be exposed in the logs or the REST API.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/key_pair#get",
+  "method": "GET",
+  "operationId": "getRepositoryPipelineSshKeyPair",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair",
+  "responses": {
+    "200": {
+      "description": "The SSH key pair.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_ssh_key_pair"
+      }
+    },
+    "404": {
+      "description": "The account, repository or SSH key pair was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

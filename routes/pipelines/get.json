@@ -1,0 +1,48 @@
+{
+  "apiName": "Get",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve a specified pipeline",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D#get",
+  "method": "GET",
+  "operationId": "getPipelineForRepository",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The pipeline UUID.",
+      "in": "path",
+      "name": "pipeline_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}",
+  "responses": {
+    "200": {
+      "description": "The pipeline.",
+      "schema": {
+        "$ref": "#/definitions/pipeline"
+      }
+    },
+    "404": {
+      "description": "No account, repository or pipeline with the UUID provided exists.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

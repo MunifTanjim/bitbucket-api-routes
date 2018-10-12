@@ -1,0 +1,57 @@
+{
+  "apiName": "Delete",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Deletes the specified webhook subscription from the given\nrepository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/hooks/%7Buid%7D#delete",
+  "method": "DELETE",
+  "parameters": [
+    {
+      "description": "The installed webhook's id",
+      "in": "path",
+      "name": "uid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "uid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/hooks/{uid}",
+  "responses": {
+    "204": {
+      "description": "When the webhook was deleted successfully"
+    },
+    "403": {
+      "description": "If the authenticated user does not have permission to delete the webhook.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the webhook or repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "apiName": "Get Branch",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a branch object within the specified repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/branches/%7Bname%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The name of the branch.",
+      "in": "path",
+      "name": "name",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/refs/branches/{name}",
+  "responses": {
+    "200": {
+      "description": "The branch object.",
+      "examples": {
+        "application/json": {
+          "links": {
+            "commits": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commits/master"
+            },
+            "html": {
+              "href": "https://bitbucket.org/example-username/bits_and_bobs/branch/master"
+            },
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/refs/branches/master"
+            }
+          },
+          "name": "master",
+          "target": {
+            "author": {
+              "raw": "Example Username <brian_stamm@gmail.com>",
+              "type": "author",
+              "user": {
+                "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                "display_name": "Example Username",
+                "links": {
+                  "avatar": {
+                    "href": "https://bitbucket.org/account/example-username/avatar/"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/example-username"
+                  }
+                },
+                "nickname": "example-username",
+                "type": "user",
+                "username": "example-username",
+                "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+              }
+            },
+            "date": "2018-06-20T23:17:33+00:00",
+            "hash": "230269fdfabdb5562a991f351b5dd6425de232d2",
+            "links": {
+              "approve": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/approve"
+              },
+              "comments": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/comments"
+              },
+              "diff": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/diff/230269fdfabdb5562a991f351b5dd6425de232d2"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabdb5562a991f351b5dd6425de232d2"
+              },
+              "patch": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/patch/230269fdfabdb5562a991f351b5dd6425de232d2"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2"
+              },
+              "statuses": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/statuses"
+              }
+            },
+            "message": "Kickass commit message!",
+            "parents": [],
+            "repository": {
+              "full_name": "example-username/bits_and_bobs",
+              "links": {
+                "avatar": {
+                  "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                }
+              },
+              "name": "bits_and_bobs",
+              "type": "repository",
+              "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+            },
+            "type": "commit"
+          },
+          "type": "branch"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/branch"
+      }
+    },
+    "403": {
+      "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The specified repository or branch does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

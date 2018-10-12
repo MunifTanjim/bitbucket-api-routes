@@ -1,0 +1,38 @@
+{
+  "apiName": "Get Diff Stat",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Redirects to the [repository diffstat](../../diffstat/%7Bspec%7D)\nwith the revspec that corresponds to the pull request.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests/%7Bpull_request_id%7D/diffstat#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "pull_request_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diffstat",
+  "responses": {
+    "302": {
+      "description": "Redirects to the [repository diffstat](../../diffstat/%7Bspec%7D) with\nthe revspec that corresponds to pull request.\n"
+    }
+  }
+}

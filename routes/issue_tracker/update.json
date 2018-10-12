@@ -1,0 +1,62 @@
+{
+  "apiName": "Update",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Modifies the issue.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D#put",
+  "method": "PUT",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The issue id",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/issue"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}",
+  "responses": {
+    "200": {
+      "description": "The updated issue object.",
+      "schema": {
+        "$ref": "#/definitions/issue"
+      }
+    },
+    "403": {
+      "description": "When the authenticated user isn't authorized to access the issue.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

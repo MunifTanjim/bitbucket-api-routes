@@ -1,0 +1,54 @@
+{
+  "apiName": "Create For User",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Identical to `/snippets`, except that the new snippet will be\ncreated under the account specified in the path parameter `{username}`.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "The new snippet object.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/snippet"
+      }
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}",
+  "responses": {
+    "201": {
+      "description": "The newly created snippet object.",
+      "headers": {
+        "Location": {
+          "description": "The URL of the newly created snippet.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/snippet"
+      }
+    },
+    "401": {
+      "description": "If the request was not authenticated",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user does not have permission to create snippets under the specified account.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

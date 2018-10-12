@@ -1,0 +1,44 @@
+{
+  "apiName": "Delete Approval",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Redact the authenticated user's approval of the specified pull\nrequest.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests/%7Bpull_request_id%7D/approve#delete",
+  "method": "DELETE",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "pull_request_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve",
+  "responses": {
+    "204": {
+      "description": "An empty response indicating the authenticated user's approval has been withdrawn."
+    },
+    "404": {
+      "description": "The specified pull request or the repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

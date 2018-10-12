@@ -1,0 +1,200 @@
+{
+  "apiName": "Merge Pull Request",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Merges the pull request.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests/%7Bpull_request_id%7D/merge#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "",
+      "in": "body",
+      "name": "_body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/pullrequest_merge_parameters"
+      }
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "pull_request_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge",
+  "responses": {
+    "200": {
+      "description": "The pull request object.",
+      "examples": {
+        "application/json": {
+          "author": {
+            "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+            "display_name": "Example Username",
+            "links": {
+              "avatar": {
+                "href": "https://bitbucket.org/account/example-username/avatar/"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username"
+              }
+            },
+            "nickname": "example-username",
+            "type": "user",
+            "username": "example-username",
+            "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+          },
+          "close_source_branch": true,
+          "closed_by": null,
+          "comment_count": 0,
+          "created_on": "2018-06-20T23:17:33.616037+00:00",
+          "description": "Everything is awesome!",
+          "destination": {
+            "branch": {
+              "name": "master"
+            },
+            "commit": {
+              "hash": "230269fdfabd",
+              "links": {
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabd"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabd"
+                }
+              },
+              "type": "commit"
+            },
+            "repository": {
+              "full_name": "example-username/bits_and_bobs",
+              "links": {
+                "avatar": {
+                  "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                }
+              },
+              "name": "bits_and_bobs",
+              "type": "repository",
+              "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+            }
+          },
+          "id": 1,
+          "links": {
+            "activity": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/activity"
+            },
+            "approve": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/approve"
+            },
+            "comments": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/comments"
+            },
+            "commits": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/commits"
+            },
+            "decline": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/decline"
+            },
+            "diff": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/diff"
+            },
+            "html": {
+              "href": "https://bitbucket.org/example-username/bits_and_bobs/pull-requests/1"
+            },
+            "merge": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/merge"
+            },
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1"
+            },
+            "statuses": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests/1/statuses"
+            }
+          },
+          "merge_commit": null,
+          "participants": [],
+          "reason": "",
+          "reviewers": [],
+          "source": {
+            "branch": {
+              "name": "branch_magnificent_internet"
+            },
+            "commit": {
+              "hash": "c184aab5708b",
+              "links": {
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/c184aab5708b"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/c184aab5708b"
+                }
+              },
+              "type": "commit"
+            },
+            "repository": {
+              "full_name": "example-username/bits_and_bobs",
+              "links": {
+                "avatar": {
+                  "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                }
+              },
+              "name": "bits_and_bobs",
+              "type": "repository",
+              "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+            }
+          },
+          "state": "OPEN",
+          "summary": {
+            "html": "<p>Everything is awesome!</p>",
+            "markup": "markdown",
+            "raw": "Everything is awesome!",
+            "type": "rendered"
+          },
+          "task_count": 0,
+          "title": "Change a cooperative standard to a smiling disease",
+          "type": "pullrequest",
+          "updated_on": "2018-06-20T23:17:33.616037+00:00"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/pullrequest"
+      }
+    },
+    "555": {
+      "description": "If the merge took too long and timed out.\nIn this case the caller should retry the request later",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "apiName": "Delete",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Deletes the repository. This is an irreversible operation.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D#delete",
+  "method": "DELETE",
+  "parameters": [
+    {
+      "description": "If a repository has been moved to a new location, use this parameter to show users a friendly message in the Bitbucket UI that the repository has moved to a new location. However, a GET to this endpoint will still return a 404. ",
+      "in": "query",
+      "name": "redirect_to",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}",
+  "responses": {
+    "204": {
+      "description": "Indicates successful deletion."
+    },
+    "403": {
+      "description": "If the caller either does not have admin access to the repository, or the repository is set to read-only.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

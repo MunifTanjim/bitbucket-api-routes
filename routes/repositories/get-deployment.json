@@ -1,0 +1,48 @@
+{
+  "apiName": "Get Deployment",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve a deployment",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/deployments/%7Bdeployment_uuid%7D#get",
+  "method": "GET",
+  "operationId": "getDeploymentForRepository",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The deployment UUID.",
+      "in": "path",
+      "name": "deployment_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/deployments/{deployment_uuid}",
+  "responses": {
+    "200": {
+      "description": "The deployment.",
+      "schema": {
+        "$ref": "#/definitions/deployment"
+      }
+    },
+    "404": {
+      "description": "No account, repository or deployment with the UUID provided exists.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

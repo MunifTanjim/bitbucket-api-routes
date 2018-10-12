@@ -1,0 +1,40 @@
+{
+  "apiName": "Create",
+  "consumes": [
+    "multipart/form-data"
+  ],
+  "description": "Upload new download artifacts.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/downloads#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "body",
+      "name": "_body",
+      "required": true
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/downloads",
+  "responses": {
+    "default": {
+      "description": "Unexpected error.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

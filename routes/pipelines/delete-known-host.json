@@ -1,0 +1,45 @@
+{
+  "apiName": "Delete Known Host",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Delete a repository level known host.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/known_hosts/%7Bknown_host_uuid%7D#delete",
+  "method": "DELETE",
+  "operationId": "deleteRepositoryPipelineKnownHost",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the known host to delete.",
+      "in": "path",
+      "name": "known_host_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}",
+  "responses": {
+    "204": {
+      "description": "The known host was deleted."
+    },
+    "404": {
+      "description": "The account, repository or known host with given UUID was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

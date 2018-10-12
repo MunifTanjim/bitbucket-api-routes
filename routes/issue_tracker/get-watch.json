@@ -1,0 +1,53 @@
+{
+  "apiName": "Get Watch",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Indicated whether or not the authenticated user is watching this\nissue.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/watch#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The issue id",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch",
+  "responses": {
+    "204": {
+      "description": "If the authenticated user is watching this issue.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "401": {
+      "description": "When the request wasn't authenticated.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the authenticated user is not watching this issue, or when the repo does not exist, or does not have an issue tracker.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

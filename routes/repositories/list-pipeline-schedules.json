@@ -1,0 +1,41 @@
+{
+  "apiName": "List Pipeline Schedules",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve the configured schedules for the given repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/#get",
+  "method": "GET",
+  "operationId": "getRepositoryPipelineSchedules",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/",
+  "responses": {
+    "200": {
+      "description": "The list of schedules.",
+      "schema": {
+        "$ref": "#/definitions/paginated_pipeline_schedules"
+      }
+    },
+    "404": {
+      "description": "The account or repository was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

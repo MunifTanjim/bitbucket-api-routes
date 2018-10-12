@@ -1,0 +1,35 @@
+{
+  "apiName": "List",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Find deployments",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/deployments/#get",
+  "method": "GET",
+  "operationId": "getDeploymentsForRepository",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/deployments/",
+  "responses": {
+    "200": {
+      "description": "The matching deployments.",
+      "schema": {
+        "$ref": "#/definitions/paginated_deployments"
+      }
+    }
+  }
+}

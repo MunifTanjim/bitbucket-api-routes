@@ -1,0 +1,152 @@
+[
+  {
+    "apiName": "Code Of Team",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/search/code#get",
+    "method": "GET",
+    "operationId": "searchAccount",
+    "parameters": [
+      {
+        "description": "The account to search in; either the username or the UUID in curly braces",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The search query",
+        "in": "query",
+        "name": "search_query",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "default": 1,
+        "description": "Which page of the search results to retrieve",
+        "format": "int32",
+        "in": "query",
+        "name": "page",
+        "required": false,
+        "type": "integer"
+      },
+      {
+        "default": 10,
+        "description": "How many search results to retrieve per page",
+        "format": "int32",
+        "in": "query",
+        "name": "pagelen",
+        "required": false,
+        "type": "integer"
+      }
+    ],
+    "path": "/teams/{username}/search/code",
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "Successful search",
+        "schema": {
+          "$ref": "#/definitions/search_result_page"
+        }
+      },
+      "400": {
+        "description": "If the search request was invalid due to one of the following reasons:\n* the specified type of target account doesn't match the actual account type;\n* malformed pagination properties;\n* missing or malformed search query, in the latter case an error key will be returned in `error.data.key` property.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "Search is not enabled for the requested team, navigate to [https://bitbucket.org/search](https://bitbucket.org/search) to turn it on",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "429": {
+        "description": "Too many requests, try again later",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    },
+    "summary": "Search for code in the repositories of the specified team"
+  },
+  {
+    "apiName": "Code Of User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/search/code#get",
+    "method": "GET",
+    "operationId": "searchAccount",
+    "parameters": [
+      {
+        "description": "The account to search in; either the username or the UUID in curly braces",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The search query",
+        "in": "query",
+        "name": "search_query",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "default": 1,
+        "description": "Which page of the search results to retrieve",
+        "format": "int32",
+        "in": "query",
+        "name": "page",
+        "required": false,
+        "type": "integer"
+      },
+      {
+        "default": 10,
+        "description": "How many search results to retrieve per page",
+        "format": "int32",
+        "in": "query",
+        "name": "pagelen",
+        "required": false,
+        "type": "integer"
+      }
+    ],
+    "path": "/users/{username}/search/code",
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "Successful search",
+        "schema": {
+          "$ref": "#/definitions/search_result_page"
+        }
+      },
+      "400": {
+        "description": "If the search request was invalid due to one of the following reasons:\n* the specified type of target account doesn't match the actual account type;\n* malformed pagination properties;\n* missing or malformed search query, in the latter case an error key will be returned in `error.data.key` property.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "Search is not enabled for the requested user, navigate to [https://bitbucket.org/search](https://bitbucket.org/search) to turn it on",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "429": {
+        "description": "Too many requests, try again later",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    },
+    "summary": "Search for code in the repositories of the specified user"
+  }
+]

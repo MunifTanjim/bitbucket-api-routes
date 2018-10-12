@@ -1,0 +1,72 @@
+{
+  "apiName": "List Refs",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the branches and tags in the repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": " This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": " This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": " Query string to narrow down the response as per [filtering and sorting](../../../../../../meta/filtering).",
+      "in": "query",
+      "name": "q",
+      "type": "string"
+    },
+    {
+      "description": " Field by which the results should be sorted as per [filtering and sorting](../../../../../../meta/filtering). The `name` field is handled specially for refs in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
+      "in": "query",
+      "name": "sort",
+      "type": "string"
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/refs",
+  "responses": {
+    "200": {
+      "description": "A paginated list of refs matching any filter criteria that were provided.",
+      "schema": {
+        "$ref": "#/definitions/paginated_refs"
+      }
+    },
+    "403": {
+      "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The specified repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

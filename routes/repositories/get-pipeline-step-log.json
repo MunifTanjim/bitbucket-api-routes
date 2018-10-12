@@ -1,0 +1,67 @@
+{
+  "apiName": "Get Pipeline Step Log",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve the log file for a given step of a pipeline.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D/steps/%7Bstep_uuid%7D/log#get",
+  "method": "GET",
+  "operationId": "getPipelineStepLogForRepository",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the pipeline.",
+      "in": "path",
+      "name": "pipeline_uuid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the step.",
+      "in": "path",
+      "name": "step_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log",
+  "produces": [
+    "application/octet-stream"
+  ],
+  "responses": {
+    "200": {
+      "description": "The raw log file for this pipeline step."
+    },
+    "304": {
+      "description": "The log has the same etag as the provided If-None-Match header.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "A pipeline with the given UUID does not exist, a step with the given UUID does not exist in the pipeline or a log file does not exist for the given step.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "416": {
+      "description": "The requested range does not exist for requests that specified the [HTTP Range header](https://tools.ietf.org/html/rfc7233#section-3.1).",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

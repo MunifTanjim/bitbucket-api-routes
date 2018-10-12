@@ -1,0 +1,48 @@
+{
+  "apiName": "Get Pipeline Schedule",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve a schedule by its UUID.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/%7Bschedule_uuid%7D#get",
+  "method": "GET",
+  "operationId": "getRepositoryPipelineSchedule",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The uuid of the schedule.",
+      "in": "path",
+      "name": "schedule_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}",
+  "responses": {
+    "200": {
+      "description": "The requested schedule.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_schedule"
+      }
+    },
+    "404": {
+      "description": "The account, repository or schedule was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

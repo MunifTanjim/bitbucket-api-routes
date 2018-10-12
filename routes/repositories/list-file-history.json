@@ -1,0 +1,82 @@
+{
+  "apiName": "List File History",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a paginated list of commits that modified the specified file.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/filehistory/%7Bnode%7D/%7Bpath%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": " When `true`, Bitbucket will follow the history of the file across renames (this is the default behavior). This can be turned off by specifying `false`.",
+      "in": "query",
+      "name": "renames",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": " Query string to narrow down the response as per [filtering and sorting](../../../../../../meta/filtering).",
+      "in": "query",
+      "name": "q",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": " Name of a response property sort the result by as per [filtering and sorting](../../../../../../meta/filtering#query-sort). ",
+      "in": "query",
+      "name": "sort",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "node",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "path",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "query",
+      "name": "fields",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}",
+  "responses": {
+    "200": {
+      "description": "A paginated list of commits that modified the specified file",
+      "schema": {
+        "$ref": "#/definitions/paginated_files"
+      }
+    },
+    "404": {
+      "description": "If the repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

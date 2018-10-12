@@ -1,0 +1,75 @@
+{
+  "apiName": "Create Pull Request",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Creates a new pull request where the destination repository is\nthis repository and the author is the authenticated user.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The new pull request.",
+      "in": "body",
+      "name": "_body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/pullrequest"
+      }
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pullrequests",
+  "responses": {
+    "201": {
+      "description": "The newly created pull request.",
+      "headers": {
+        "Location": {
+          "description": "The URL of new newly created pull request.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/pullrequest"
+      }
+    },
+    "400": {
+      "description": "If the input document was invalid, or if the caller lacks the privilege to create repositories under the targeted account.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "401": {
+      "description": "If the request was not authenticated.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "apiName": "Create Commit Approval",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Approve the specified commit as the authenticated user.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/approve#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The commit's SHA1.",
+      "in": "path",
+      "name": "node",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/commit/{node}/approve",
+  "responses": {
+    "200": {
+      "description": "The `participant` object recording that the authenticated user approved the commit.",
+      "schema": {
+        "$ref": "#/definitions/participant"
+      }
+    },
+    "404": {
+      "description": "If the specified commit, or the repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "apiName": "Get Email",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns details about a specific one of the authenticated user's\nemail addresses.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/emails/%7Bemail%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "email",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/user/emails/{email}",
+  "responses": {
+    "default": {
+      "description": "Unexpected error.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,699 @@
+[
+  {
+    "apiName": "List",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the branches and tags in the repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": " This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "type": "string"
+      },
+      {
+        "description": " Field by which the results should be sorted as per [filtering and sorting](../../../../../../meta/filtering). The `name` field is handled specially for refs in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
+        "in": "query",
+        "name": "sort",
+        "type": "string"
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs",
+    "responses": {
+      "200": {
+        "description": "A paginated list of refs matching any filter criteria that were provided.",
+        "schema": {
+          "$ref": "#/definitions/paginated_refs"
+        }
+      },
+      "403": {
+        "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Branches",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a list of all open branches within the specified repository.\nResults will be in the order the source control manager returns them.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/branches#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": " This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "type": "string"
+      },
+      {
+        "description": " Field by which the results should be sorted as per [filtering and sorting](../../../../../../meta/filtering). The `name` field is handled specially for branches in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return ['branch1', 'branch2', 'branch10'] instead of ['branch1', 'branch10', 'branch2'].",
+        "in": "query",
+        "name": "sort",
+        "type": "string"
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs/branches",
+    "responses": {
+      "200": {
+        "description": "A paginated list of branches matching any filter criteria that were provided.",
+        "schema": {
+          "$ref": "#/definitions/paginated_branches"
+        }
+      },
+      "403": {
+        "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Branch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new branch in the specified repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/branches#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "body",
+        "name": "_body",
+        "required": true
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs/branches",
+    "responses": {
+      "201": {
+        "description": "The newly created branch object.",
+        "examples": {
+          "application/json": {
+            "links": {
+              "commits": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commits/master"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/bits_and_bobs/branch/master"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/refs/branches/master"
+              }
+            },
+            "name": "master",
+            "target": {
+              "author": {
+                "raw": "Example Username <brian_stamm@gmail.com>",
+                "type": "author",
+                "user": {
+                  "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                  "display_name": "Example Username",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bitbucket.org/account/example-username/avatar/"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/users/example-username"
+                    }
+                  },
+                  "nickname": "example-username",
+                  "type": "user",
+                  "username": "example-username",
+                  "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+                }
+              },
+              "date": "2018-06-20T23:17:33+00:00",
+              "hash": "230269fdfabdb5562a991f351b5dd6425de232d2",
+              "links": {
+                "approve": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/approve"
+                },
+                "comments": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/comments"
+                },
+                "diff": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/diff/230269fdfabdb5562a991f351b5dd6425de232d2"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabdb5562a991f351b5dd6425de232d2"
+                },
+                "patch": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/patch/230269fdfabdb5562a991f351b5dd6425de232d2"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2"
+                },
+                "statuses": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/statuses"
+                }
+              },
+              "message": "Kickass commit message!",
+              "parents": [],
+              "repository": {
+                "full_name": "example-username/bits_and_bobs",
+                "links": {
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                  }
+                },
+                "name": "bits_and_bobs",
+                "type": "repository",
+                "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+              },
+              "type": "commit"
+            },
+            "type": "branch"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/branch"
+        }
+      },
+      "403": {
+        "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or branch does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Branch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete a branch in the specified repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/branches/%7Bname%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The name of the branch.",
+        "in": "path",
+        "name": "name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs/branches/{name}",
+    "responses": {
+      "204": {
+        "description": "Indicates that the specified branch was successfully deleted."
+      },
+      "403": {
+        "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or branch does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Branch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a branch object within the specified repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/branches/%7Bname%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The name of the branch.",
+        "in": "path",
+        "name": "name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs/branches/{name}",
+    "responses": {
+      "200": {
+        "description": "The branch object.",
+        "examples": {
+          "application/json": {
+            "links": {
+              "commits": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commits/master"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/bits_and_bobs/branch/master"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/refs/branches/master"
+              }
+            },
+            "name": "master",
+            "target": {
+              "author": {
+                "raw": "Example Username <brian_stamm@gmail.com>",
+                "type": "author",
+                "user": {
+                  "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+                  "display_name": "Example Username",
+                  "links": {
+                    "avatar": {
+                      "href": "https://bitbucket.org/account/example-username/avatar/"
+                    },
+                    "html": {
+                      "href": "https://bitbucket.org/example-username/"
+                    },
+                    "self": {
+                      "href": "https://api.bitbucket.org/2.0/users/example-username"
+                    }
+                  },
+                  "nickname": "example-username",
+                  "type": "user",
+                  "username": "example-username",
+                  "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+                }
+              },
+              "date": "2018-06-20T23:17:33+00:00",
+              "hash": "230269fdfabdb5562a991f351b5dd6425de232d2",
+              "links": {
+                "approve": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/approve"
+                },
+                "comments": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/comments"
+                },
+                "diff": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/diff/230269fdfabdb5562a991f351b5dd6425de232d2"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/example-username/bits_and_bobs/commits/230269fdfabdb5562a991f351b5dd6425de232d2"
+                },
+                "patch": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/patch/230269fdfabdb5562a991f351b5dd6425de232d2"
+                },
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2"
+                },
+                "statuses": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commit/230269fdfabdb5562a991f351b5dd6425de232d2/statuses"
+                }
+              },
+              "message": "Kickass commit message!",
+              "parents": [],
+              "repository": {
+                "full_name": "example-username/bits_and_bobs",
+                "links": {
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/example-username/bits_and_bobs"
+                  },
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+                  }
+                },
+                "name": "bits_and_bobs",
+                "type": "repository",
+                "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}"
+              },
+              "type": "commit"
+            },
+            "type": "branch"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/branch"
+        }
+      },
+      "403": {
+        "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or branch does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Tags",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the tags in the repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/tags#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": " This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "type": "string"
+      },
+      {
+        "description": " Field by which the results should be sorted as per [filtering and sorting](../../../../../../meta/filtering). The `name` field is handled specially for tags in that, if specified as the sort field, it uses a natural sort order instead of the default lexicographical sort order. For example, it will return ['1.1', '1.2', '1.10'] instead of ['1.1', '1.10', '1.2'].",
+        "in": "query",
+        "name": "sort",
+        "type": "string"
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs/tags",
+    "responses": {
+      "200": {
+        "description": "A paginated list of tags matching any filter criteria that were provided.",
+        "schema": {
+          "$ref": "#/definitions/paginated_tags"
+        }
+      },
+      "403": {
+        "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Tag",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new tag in the specified repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/tags#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/tag"
+        }
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs/tags",
+    "responses": {
+      "201": {
+        "description": "The newly created tag.",
+        "schema": {
+          "$ref": "#/definitions/tag"
+        }
+      },
+      "400": {
+        "description": "If the target hash is missing, ambiguous, or invalid, or if the name is not provided.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Tag",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete a tag in the specified repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/tags/%7Bname%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The name of the tag.",
+        "in": "path",
+        "name": "name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs/tags/{name}",
+    "responses": {
+      "204": {
+        "description": "Indicates the specified tag was successfully deleted."
+      },
+      "403": {
+        "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or tag does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Tag",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the specified tag.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/tags/%7Bname%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The name of the tag.",
+        "in": "path",
+        "name": "name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/refs/tags/{name}",
+    "responses": {
+      "200": {
+        "description": "The tag object.",
+        "schema": {
+          "$ref": "#/definitions/tag"
+        }
+      },
+      "403": {
+        "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or tag does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

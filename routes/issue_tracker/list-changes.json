@@ -1,0 +1,61 @@
+{
+  "apiName": "List Changes",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the list of all changes that have been made to the specified\nissue. Changes are returned in chronological order with the oldest\nchange first.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/changes#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": " Query string to narrow down the response. See [filtering and sorting](../../../meta/filtering) for details.",
+      "in": "query",
+      "name": "q",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": " Name of a response property to sort results. See [filtering and sorting](../../../meta/filtering#query-sort) for details. ",
+      "in": "query",
+      "name": "sort",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The issue id",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes",
+  "responses": {
+    "200": {
+      "description": "Returns all the issue changes that were made on the specified issue.",
+      "schema": {
+        "$ref": "#/definitions/paginated_log_entries"
+      }
+    },
+    "404": {
+      "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

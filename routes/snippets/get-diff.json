@@ -1,0 +1,70 @@
+{
+  "apiName": "Get Diff",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the diff of the specified commit against its first parent.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/%7Brevision%7D/diff#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "When used, only one the diff of the specified file will be returned.",
+      "in": "query",
+      "name": "path",
+      "type": "string"
+    },
+    {
+      "description": "The snippet id.",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "A revspec expression. This can simply be a commit SHA1, a ref name, or a compare expression like `staging..production`.",
+      "in": "path",
+      "name": "revision",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "revision",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}/{encoded_id}/{revision}/diff",
+  "responses": {
+    "200": {
+      "description": "The raw diff contents."
+    },
+    "403": {
+      "description": "If the authenticated user does not have access to the snippet.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the snippet does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

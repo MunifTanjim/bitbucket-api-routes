@@ -1,0 +1,1144 @@
+[
+  {
+    "apiName": "List Repositories For Team",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "All repositories owned by a user/team. This includes private\nrepositories, but filtered down to the ones that the calling user has\naccess to.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/repositories#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/repositories",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Authed User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the currently logged in user.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user#get",
+    "method": "GET",
+    "parameters": [],
+    "path": "/user",
+    "responses": {
+      "200": {
+        "description": "The current user.",
+        "examples": {
+          "application/json": {
+            "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+            "account_status": "active",
+            "created_on": "2018-06-20T23:17:33.616037+00:00",
+            "display_name": "Example Username",
+            "is_staff": false,
+            "links": {
+              "avatar": {
+                "href": "https://bitbucket.org/account/example-username/avatar/"
+              },
+              "followers": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username/followers"
+              },
+              "following": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username/following"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/"
+              },
+              "repositories": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username"
+              },
+              "snippets": {
+                "href": "https://api.bitbucket.org/2.0/snippets/example-username"
+              }
+            },
+            "location": null,
+            "nickname": "example-username",
+            "type": "user",
+            "username": "example-username",
+            "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}",
+            "website": null
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/user"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Emails For Authed User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns all the authenticated user's email addresses. Both\nconfirmed and unconfirmed.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/emails#get",
+    "method": "GET",
+    "parameters": [],
+    "path": "/user/emails",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Email For Authed User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns details about a specific one of the authenticated user's\nemail addresses.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/emails/%7Bemail%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "email",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/user/emails/{email}",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Gets the public information associated with a user account.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}",
+    "responses": {
+      "200": {
+        "description": "The user object",
+        "examples": {
+          "application/json": {
+            "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+            "display_name": "Example Username",
+            "links": {
+              "avatar": {
+                "href": "https://bitbucket.org/account/example-username/avatar/"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username"
+              }
+            },
+            "type": "user",
+            "username": "example-username",
+            "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/user"
+        }
+      },
+      "404": {
+        "description": "If no user exists for the specified name or UUID, or if the specified account is a team account, not a personal account.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Followers",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the list of accounts that are following this team.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/followers#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The account's username",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/followers",
+    "responses": {
+      "200": {
+        "description": "A paginated list of user objects.",
+        "schema": {
+          "$ref": "#/definitions/paginated_users"
+        }
+      },
+      "404": {
+        "description": "If no account exists for the specified name, or if the specified account is a team account, not a personal account.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Following",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the list of accounts this user is following.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/following#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The user's username",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/following",
+    "responses": {
+      "200": {
+        "description": "A paginated list of user objects.",
+        "schema": {
+          "$ref": "#/definitions/paginated_users"
+        }
+      },
+      "404": {
+        "description": "If no user exists for the specified name, or if the specified account is a team account, not a personal account.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Webhooks",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a paginated list of webhooks installed on this user account.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/hooks#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/hooks",
+    "responses": {
+      "200": {
+        "description": "The paginated list of installed webhooks.",
+        "schema": {
+          "$ref": "#/definitions/paginated_webhook_subscriptions"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user is accessing an account other than their own.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the specified account does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Webhook",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new webhook on the specified user account.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/hooks#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/hooks",
+    "responses": {
+      "201": {
+        "description": "The newly installed webhook.",
+        "headers": {
+          "Location": {
+            "description": "The URL of new newly created webhook.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/webhook_subscription"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user is accessing an account other than their own.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the specified account does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Webhook",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes the specified webhook subscription from the given user\naccount.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/hooks/%7Buid%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "The installed webhook's id",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/hooks/{uid}",
+    "responses": {
+      "204": {
+        "description": "When the webhook was deleted successfully"
+      },
+      "403": {
+        "description": "If the authenticated user does not have permission to delete the webhook.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the webhook or user does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Webhook",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the webhook with the specified id installed on the given\nuser account.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/hooks/%7Buid%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The installed webhook's id.",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/hooks/{uid}",
+    "responses": {
+      "200": {
+        "description": "The webhook subscription object.",
+        "schema": {
+          "$ref": "#/definitions/webhook_subscription"
+        }
+      },
+      "404": {
+        "description": "If the webhook or user does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Webhook",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Updates the specified webhook subscription.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/hooks/%7Buid%7D#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "The installed webhook's id",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/hooks/{uid}",
+    "responses": {
+      "200": {
+        "description": "The webhook subscription object.",
+        "schema": {
+          "$ref": "#/definitions/webhook_subscription"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have permission to update the webhook.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the webhook or user does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Team Members",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "All members of a team.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/members#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/members",
+    "responses": {
+      "200": {
+        "description": "All members",
+        "examples": {
+          "application/json": {
+            "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+            "account_status": "active",
+            "display_name": "Example Username",
+            "links": {
+              "avatar": {
+                "href": "https://bitbucket.org/account/example-username/avatar/"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username"
+              }
+            },
+            "nickname": "example-username",
+            "type": "user",
+            "username": "example-username",
+            "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/user"
+        }
+      },
+      "404": {
+        "description": "When the team does not exist, or multiple teams with the same name exist that differ only in casing and the URL did not match the exact casing of a particular one.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Pipeline Variables",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Find user level variables.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/#get",
+    "method": "GET",
+    "operationId": "getPipelineVariablesForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/",
+    "responses": {
+      "200": {
+        "description": "The found user level variables.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_variables"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Pipeline Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Create a user level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/#post",
+    "method": "POST",
+    "operationId": "createPipelineVariableForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The variable to create.",
+        "in": "body",
+        "name": "_body",
+        "required": false,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/",
+    "responses": {
+      "201": {
+        "description": "The created variable.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created pipeline variable.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "409": {
+        "description": "A variable with the provided key already exists.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Pipeline Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete an account level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#delete",
+    "method": "DELETE",
+    "operationId": "deletePipelineVariableForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to delete.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "204": {
+        "description": "The variable was deleted"
+      },
+      "404": {
+        "description": "The account or the variable with the provided UUID does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Pipeline Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a user level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getPipelineVariableForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to retrieve.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or variable with the given UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Pipeline Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update a user level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#put",
+    "method": "PUT",
+    "operationId": "updatePipelineVariableForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated variable.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable was updated.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or the variable was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Repositories",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "All repositories owned by a user/team. This includes private\nrepositories, but filtered down to the ones that the calling user has\naccess to.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/repositories#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/repositories",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Search Code",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/search/code#get",
+    "method": "GET",
+    "operationId": "searchAccount",
+    "parameters": [
+      {
+        "description": "The account to search in; either the username or the UUID in curly braces",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The search query",
+        "in": "query",
+        "name": "search_query",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "default": 1,
+        "description": "Which page of the search results to retrieve",
+        "format": "int32",
+        "in": "query",
+        "name": "page",
+        "required": false,
+        "type": "integer"
+      },
+      {
+        "default": 10,
+        "description": "How many search results to retrieve per page",
+        "format": "int32",
+        "in": "query",
+        "name": "pagelen",
+        "required": false,
+        "type": "integer"
+      }
+    ],
+    "path": "/users/{username}/search/code",
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "Successful search",
+        "schema": {
+          "$ref": "#/definitions/search_result_page"
+        }
+      },
+      "400": {
+        "description": "If the search request was invalid due to one of the following reasons:\n* the specified type of target account doesn't match the actual account type;\n* malformed pagination properties;\n* missing or malformed search query, in the latter case an error key will be returned in `error.data.key` property.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "Search is not enabled for the requested user, navigate to [https://bitbucket.org/search](https://bitbucket.org/search) to turn it on",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "429": {
+        "description": "Too many requests, try again later",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    },
+    "summary": "Search for code in the repositories of the specified user"
+  },
+  {
+    "apiName": "List Ssh Keys",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a paginated list of the user's SSH public keys.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys",
+    "responses": {
+      "200": {
+        "description": "A list of the SSH keys associated with the account.",
+        "schema": {
+          "$ref": "#/definitions/paginated_ssh_user_keys"
+        }
+      },
+      "403": {
+        "description": "If the specified user's keys are not accessible to the current user"
+      },
+      "404": {
+        "description": "If the specified user does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Ssh Key",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Adds a new SSH public key to the specified user account and returns the resulting key.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The new SSH key object",
+        "in": "body",
+        "name": "_body",
+        "required": false,
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys",
+    "responses": {
+      "201": {
+        "description": "The newly created SSH key.",
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      "400": {
+        "description": "If the submitted key or related value is invalid",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If the current user does not have permission to add a key for the specified user"
+      },
+      "404": {
+        "description": "If the specified user does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Ssh Key",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes a specific SSH public key from a user's account",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys/#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The SSH key's UUID value.",
+        "in": "path",
+        "name": "key_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys/{key_id}",
+    "responses": {
+      "204": {
+        "description": "The key has been deleted"
+      },
+      "403": {
+        "description": "If the current user does not have permission to add a key for the specified user"
+      },
+      "404": {
+        "description": "If the specified user does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Ssh Key",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a specific SSH public key belonging to a user.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys/#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The SSH key's UUID value.",
+        "in": "path",
+        "name": "key_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys/{key_id}",
+    "responses": {
+      "200": {
+        "description": "The specific SSH key matching the user and UUID",
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      "403": {
+        "description": "If the specified user or key is not accessible to the current user"
+      },
+      "404": {
+        "description": "If the specified user or key does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Ssh Key",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Updates a specific SSH public key on a user's account",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys/#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The SSH key's UUID value.",
+        "in": "path",
+        "name": "key_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated SSH key object",
+        "in": "body",
+        "name": "_body",
+        "required": false,
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys/{key_id}",
+    "responses": {
+      "200": {
+        "description": "The newly updated SSH key.",
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      "400": {
+        "description": "If the submitted key or related value is invalid",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If the current user does not have permission to add a key for the specified user"
+      },
+      "404": {
+        "description": "If the specified user does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

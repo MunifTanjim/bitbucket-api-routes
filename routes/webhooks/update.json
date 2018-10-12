@@ -1,0 +1,60 @@
+{
+  "apiName": "Update",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Updates the specified webhook subscription.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/hooks/%7Buid%7D#put",
+  "method": "PUT",
+  "parameters": [
+    {
+      "description": "The installed webhook's id",
+      "in": "path",
+      "name": "uid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "uid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/hooks/{uid}",
+  "responses": {
+    "200": {
+      "description": "The webhook subscription object.",
+      "schema": {
+        "$ref": "#/definitions/webhook_subscription"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user does not have permission to update the webhook.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the webhook or repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

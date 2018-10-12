@@ -1,0 +1,1635 @@
+[
+  {
+    "apiName": "List Components",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the components that have been defined in the issue tracker.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/components#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/components",
+    "responses": {
+      "200": {
+        "description": "The components that have been defined in the issue tracker.",
+        "schema": {
+          "$ref": "#/definitions/paginated_components"
+        }
+      },
+      "404": {
+        "description": "The specified repository does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Component",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the specified issue tracker component object.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/components/%7Bcomponent_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The component's id",
+        "in": "path",
+        "name": "component_id",
+        "required": true,
+        "type": "integer"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/components/{component_id}",
+    "responses": {
+      "200": {
+        "description": "The specified component object.",
+        "schema": {
+          "$ref": "#/definitions/component"
+        }
+      },
+      "404": {
+        "description": "The specified repository or component does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the issues in the issue tracker.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues",
+    "responses": {
+      "200": {
+        "description": "A paginated list of the issues matching any filter criteria that were provided.",
+        "schema": {
+          "$ref": "#/definitions/paginated_issues"
+        }
+      },
+      "404": {
+        "description": "The specified repository does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The new issue. The only required element is `title`. All other elements can be omitted from the body.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/issue"
+        }
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues",
+    "responses": {
+      "201": {
+        "description": "The newly created issue.",
+        "headers": {
+          "Location": {
+            "description": "The (absolute) URL of the newly created issue.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/issue"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "When the authenticated user isn't authorized to create the issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes the specified issue. This requires write access to the\nrepository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}",
+    "responses": {
+      "200": {
+        "description": "The issue object.",
+        "schema": {
+          "$ref": "#/definitions/issue"
+        }
+      },
+      "403": {
+        "description": "When the authenticated user isn't authorized to delete the issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the specified issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}",
+    "responses": {
+      "200": {
+        "description": "The issue object.",
+        "schema": {
+          "$ref": "#/definitions/issue"
+        }
+      },
+      "403": {
+        "description": "When the authenticated user isn't authorized to access the issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Modifies the issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/issue"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}",
+    "responses": {
+      "200": {
+        "description": "The updated issue object.",
+        "schema": {
+          "$ref": "#/definitions/issue"
+        }
+      },
+      "403": {
+        "description": "When the authenticated user isn't authorized to access the issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Attachments",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns all attachments for this issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/attachments#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The issue's id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "integer"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments",
+    "responses": {
+      "200": {
+        "description": "A paginated list of all attachments for this issue.",
+        "schema": {
+          "$ref": "#/definitions/paginated_issue_attachments"
+        }
+      },
+      "401": {
+        "description": "If the issue tracker is private and the request was not authenticated."
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Attachments",
+    "consumes": [
+      "multipart/form-data"
+    ],
+    "description": "Upload new issue attachments.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/attachments#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The issue's id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "integer"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "body",
+        "name": "_body",
+        "required": true
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments",
+    "responses": {
+      "201": {
+        "description": "An empty response document.",
+        "headers": {
+          "Location": {
+            "description": "The URL to the issue's collection of attachments.",
+            "type": "string"
+          }
+        }
+      },
+      "400": {
+        "description": "If no files were uploaded, or if the wrong `Content-Type` was used."
+      },
+      "401": {
+        "description": "If the issue tracker is private and the request was not authenticated."
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Attachment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes an attachment.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/attachments/%7Bpath%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}",
+    "responses": {
+      "204": {
+        "description": "Indicates that the deletion was successful"
+      },
+      "401": {
+        "description": "If the issue tracker is private and the request was not authenticated."
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Attachment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the contents of the specified file attachment.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/attachments/%7Bpath%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}",
+    "responses": {
+      "302": {
+        "description": "A redirect to the file's contents",
+        "headers": {
+          "Location": {
+            "type": "string"
+          }
+        }
+      },
+      "401": {
+        "description": "If the issue tracker is private and the request was not authenticated."
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Changes",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the list of all changes that have been made to the specified\nissue. Changes are returned in chronological order with the oldest\nchange first.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/changes#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": " Query string to narrow down the response. See [filtering and sorting](../../../meta/filtering) for details.",
+        "in": "query",
+        "name": "q",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " Name of a response property to sort results. See [filtering and sorting](../../../meta/filtering#query-sort) for details. ",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes",
+    "responses": {
+      "200": {
+        "description": "Returns all the issue changes that were made on the specified issue.",
+        "schema": {
+          "$ref": "#/definitions/paginated_log_entries"
+        }
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Change",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Makes a change to the specified issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/changes#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The new issue state change. The only required elements are `changes.[].new`. All other elements can be omitted from the body.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/issue_change"
+        }
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes",
+    "responses": {
+      "201": {
+        "description": "The newly created issue change.",
+        "headers": {
+          "Location": {
+            "description": "The (absolute) URL of the newly created issue change.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/issue_change"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "When the authenticated user isn't authorized to modify the issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Change",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the specified issue change object.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/changes/%7Bchange_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue change id",
+        "in": "path",
+        "name": "change_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes/{change_id}",
+    "responses": {
+      "200": {
+        "description": "The specified issue change object.",
+        "schema": {
+          "$ref": "#/definitions/issue_change"
+        }
+      },
+      "404": {
+        "description": "The specified repository or issue change does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Comments",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a paginated list of all comments that were made on the\nspecified issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/comments#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments",
+    "responses": {
+      "200": {
+        "description": "A paginated list of issue comments.",
+        "schema": {
+          "$ref": "#/definitions/paginated_issue_comments"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Comment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new issue comment.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/comments#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The new issue comment object.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/issue_comment"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments",
+    "responses": {
+      "201": {
+        "description": "The newly created comment.",
+        "headers": {
+          "Location": {
+            "description": "The location of the newly issue comment.",
+            "type": "string"
+          }
+        }
+      },
+      "400": {
+        "description": "If the input was invalid, or if the comment being created is detected as spam ",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Comment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes the specified comment.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/comments/%7Bcomment_id%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The ID of the issue that is being queried. ",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated comment.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/issue_comment"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "comment_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}",
+    "responses": {
+      "204": {
+        "description": "Indicates successful deletion."
+      }
+    }
+  },
+  {
+    "apiName": "Get Comment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the specified issue comment object.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/comments/%7Bcomment_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The ID of the issue that is being queried. ",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "comment_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}",
+    "responses": {
+      "200": {
+        "description": "The issue comment.",
+        "schema": {
+          "$ref": "#/definitions/issue_comment"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Comment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Updates the content of the specified issue comment. Note that only\nthe `content.raw` field can be modified.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/comments/%7Bcomment_id%7D#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The ID of the issue that is being queried. ",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated comment.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/issue_comment"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "comment_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}",
+    "responses": {
+      "200": {
+        "description": "The updated issue comment.",
+        "schema": {
+          "$ref": "#/definitions/issue_comment"
+        }
+      },
+      "400": {
+        "description": "If the input was invalid, or if the update to the comment is detected as spam ",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Vote",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retract your vote.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/vote#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Vote",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Check whether the authenticated user has voted for this issue.\nA 204 status code indicates that the user has voted, while a 404\nimplies they haven't.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/vote#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote",
+    "responses": {
+      "204": {
+        "description": "If the authenticated user has not voted for this issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the authenticated user has not voted for this issue, or when the repo does not exist, or does not have an issue tracker.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Vote",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Vote for this issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/vote#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote",
+    "responses": {
+      "204": {
+        "description": "Indicating the authenticated user has cast their vote successfully.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Watch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Stop watching this issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/watch#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch",
+    "responses": {
+      "204": {
+        "description": "Indicates that the authenticated user successfully stopped watching this issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Watch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Indicated whether or not the authenticated user is watching this\nissue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/watch#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch",
+    "responses": {
+      "204": {
+        "description": "If the authenticated user is watching this issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the authenticated user is not watching this issue, or when the repo does not exist, or does not have an issue tracker.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Watch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Start watching this issue.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/watch#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The issue id",
+        "in": "path",
+        "name": "issue_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch",
+    "responses": {
+      "204": {
+        "description": "Indicates that the authenticated user successfully started watching this issue.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the authenticated user is not watching this issue, or when the repo does not exist, or does not have an issue tracker.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Milestones",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the milestones that have been defined in the issue tracker.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/milestones#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/milestones",
+    "responses": {
+      "200": {
+        "description": "The milestones that have been defined in the issue tracker.",
+        "schema": {
+          "$ref": "#/definitions/paginated_milestones"
+        }
+      },
+      "404": {
+        "description": "The specified repository does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Milestone",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the specified issue tracker milestone object.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/milestones/%7Bmilestone_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The milestone's id",
+        "in": "path",
+        "name": "milestone_id",
+        "required": true,
+        "type": "integer"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/milestones/{milestone_id}",
+    "responses": {
+      "200": {
+        "description": "The specified milestone object.",
+        "schema": {
+          "$ref": "#/definitions/milestone"
+        }
+      },
+      "404": {
+        "description": "The specified repository or milestone does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Versions",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the versions that have been defined in the issue tracker.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/versions#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/versions",
+    "responses": {
+      "200": {
+        "description": "The versions that have been defined in the issue tracker.",
+        "schema": {
+          "$ref": "#/definitions/paginated_versions"
+        }
+      },
+      "404": {
+        "description": "The specified repository does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Version",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the specified issue tracker version object.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/versions/%7Bversion_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The version's id",
+        "in": "path",
+        "name": "version_id",
+        "required": true,
+        "type": "integer"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/versions/{version_id}",
+    "responses": {
+      "200": {
+        "description": "The specified version object.",
+        "schema": {
+          "$ref": "#/definitions/version"
+        }
+      },
+      "404": {
+        "description": "The specified repository or version does not exist or does not have the issue tracker enabled.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "apiName": "Update Comment",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Updates the content of the specified issue comment. Note that only\nthe `content.raw` field can be modified.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/comments/%7Bcomment_id%7D#put",
+  "method": "PUT",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The ID of the issue that is being queried. ",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The updated comment.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/issue_comment"
+      }
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "comment_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}",
+  "responses": {
+    "200": {
+      "description": "The updated issue comment.",
+      "schema": {
+        "$ref": "#/definitions/issue_comment"
+      }
+    },
+    "400": {
+      "description": "If the input was invalid, or if the update to the comment is detected as spam ",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

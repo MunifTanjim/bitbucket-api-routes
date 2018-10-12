@@ -1,0 +1,74 @@
+{
+  "apiName": "Create Issue Change",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Makes a change to the specified issue.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/changes#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "The new issue state change. The only required elements are `changes.[].new`. All other elements can be omitted from the body.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/issue_change"
+      }
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The issue id",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes",
+  "responses": {
+    "201": {
+      "description": "The newly created issue change.",
+      "headers": {
+        "Location": {
+          "description": "The (absolute) URL of the newly created issue change.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/issue_change"
+      }
+    },
+    "401": {
+      "description": "When the request wasn't authenticated.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "403": {
+      "description": "When the authenticated user isn't authorized to modify the issue.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

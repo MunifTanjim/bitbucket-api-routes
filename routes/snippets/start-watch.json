@@ -1,0 +1,52 @@
+{
+  "apiName": "Start Watch",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Used to start watching a specific snippet. Returns 204 (No Content).",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/watch#put",
+  "method": "PUT",
+  "parameters": [
+    {
+      "description": "The snippet id.",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}/{encoded_id}/watch",
+  "responses": {
+    "204": {
+      "schema": {
+        "$ref": ""
+      }
+    },
+    "401": {
+      "description": "If the request was not authenticated.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the snippet does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

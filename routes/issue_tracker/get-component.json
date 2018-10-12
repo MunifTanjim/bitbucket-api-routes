@@ -1,0 +1,47 @@
+{
+  "apiName": "Get Component",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the specified issue tracker component object.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/components/%7Bcomponent_id%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The component's id",
+      "in": "path",
+      "name": "component_id",
+      "required": true,
+      "type": "integer"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/components/{component_id}",
+  "responses": {
+    "200": {
+      "description": "The specified component object.",
+      "schema": {
+        "$ref": "#/definitions/component"
+      }
+    },
+    "404": {
+      "description": "The specified repository or component does not exist or does not have the issue tracker enabled.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

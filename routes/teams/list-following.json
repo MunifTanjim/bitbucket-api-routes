@@ -1,0 +1,40 @@
+{
+  "apiName": "List Following",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the list of accounts this team is following.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/following#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "The team's username",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/teams/{username}/following",
+  "responses": {
+    "200": {
+      "description": "A paginated list of user objects.",
+      "schema": {
+        "$ref": "#/definitions/paginated_users"
+      }
+    },
+    "404": {
+      "description": "If no team exists for the specified name, or if the specified account is a personal account, not a team account.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

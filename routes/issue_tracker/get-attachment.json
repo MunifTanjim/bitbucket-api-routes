@@ -1,0 +1,59 @@
+{
+  "apiName": "Get Attachment",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the contents of the specified file attachment.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/attachments/%7Bpath%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "path",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}",
+  "responses": {
+    "302": {
+      "description": "A redirect to the file's contents",
+      "headers": {
+        "Location": {
+          "type": "string"
+        }
+      }
+    },
+    "401": {
+      "description": "If the issue tracker is private and the request was not authenticated."
+    },
+    "404": {
+      "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

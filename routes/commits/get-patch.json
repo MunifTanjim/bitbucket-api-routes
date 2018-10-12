@@ -1,0 +1,44 @@
+{
+  "apiName": "Get Patch",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Produces a raw patch for a single commit (diffed against its first\nparent), or a patch-series for a revspec of 2 commits (e.g.\n`3a8b42..9ff173` where the first commit represents the source and the\nsecond commit the destination).",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/patch/%7Bspec%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "spec",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/patch/{spec}",
+  "responses": {
+    "200": {
+      "description": "The raw patches"
+    },
+    "555": {
+      "description": "If the diff was too large and timed out.\n\nSince this endpoint does not employ any form of pagination, but\ninstead returns the diff as a single document, it can run into\ntrouble on very large diffs. If Bitbucket times out in cases\nlike these, a 555 status code is returned.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

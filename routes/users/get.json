@@ -1,0 +1,60 @@
+{
+  "apiName": "Get",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Gets the public information associated with a user account.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "The account's username or UUID.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/users/{username}",
+  "responses": {
+    "200": {
+      "description": "The user object",
+      "examples": {
+        "application/json": {
+          "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+          "display_name": "Example Username",
+          "links": {
+            "avatar": {
+              "href": "https://bitbucket.org/account/example-username/avatar/"
+            },
+            "html": {
+              "href": "https://bitbucket.org/example-username/"
+            },
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/users/example-username"
+            }
+          },
+          "type": "user",
+          "username": "example-username",
+          "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/user"
+      }
+    },
+    "404": {
+      "description": "If no user exists for the specified name or UUID, or if the specified account is a team account, not a personal account.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

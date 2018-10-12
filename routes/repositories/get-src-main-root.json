@@ -1,0 +1,50 @@
+{
+  "apiName": "Get Src Main Root",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "This endpoint redirects the client to the directory listing of the\nroot directory on the main branch.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/src#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "Instead of returning the file's contents, return the (json) meta data for it.",
+      "enum": [
+        "meta"
+      ],
+      "in": "query",
+      "name": "format",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/src",
+  "responses": {
+    "200": {
+      "description": "If the path matches a file, then the raw contents of the file are\nreturned (unless the `format=meta` query parameter was provided,\nin which case a json document containing the file's meta data is\nreturned). If the path matches a directory, then a paginated\nlist of file and directory entries is returned (if the\n`format=meta` query parameter was provided, then the json document\ncontaining the directory's meta data is returned).\n",
+      "schema": {
+        "$ref": "#/definitions/paginated_treeentries"
+      }
+    },
+    "404": {
+      "description": "If the path or commit in the URL does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

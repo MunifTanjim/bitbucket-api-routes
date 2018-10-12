@@ -1,0 +1,47 @@
+{
+  "apiName": "Create Pull Request Approval",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Approve the specified pull request as the authenticated user.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests/%7Bpull_request_id%7D/approve#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "pull_request_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve",
+  "responses": {
+    "200": {
+      "description": "The `participant` object recording that the authenticated user approved the pull request.",
+      "schema": {
+        "$ref": "#/definitions/participant"
+      }
+    },
+    "404": {
+      "description": "The specified pull request or the repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,1838 @@
+[
+  {
+    "apiName": "List",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Find pipelines",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/#get",
+    "method": "GET",
+    "operationId": "getPipelinesForRepository",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines/",
+    "responses": {
+      "200": {
+        "description": "The matching pipelines.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipelines"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Endpoint to create and initiate a pipeline. \nThere are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.\n# Trigger a Pipeline for a branch\nOne way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline. \nThe specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/#post",
+    "method": "POST",
+    "operationId": "createPipelineForRepository",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The pipeline to initiate.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines/",
+    "responses": {
+      "201": {
+        "description": "The initiated pipeline.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created pipeline.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/pipeline"
+        }
+      },
+      "400": {
+        "description": "The account or repository is not enabled, the yml file does not exist in the repository for the given revision, or the request body contained invalid properties.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The account or repository was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a specified pipeline",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getPipelineForRepository",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The pipeline UUID.",
+        "in": "path",
+        "name": "pipeline_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}",
+    "responses": {
+      "200": {
+        "description": "The pipeline.",
+        "schema": {
+          "$ref": "#/definitions/pipeline"
+        }
+      },
+      "404": {
+        "description": "No account, repository or pipeline with the UUID provided exists.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Steps",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Find steps for the given pipeline.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D/steps/#get",
+    "method": "GET",
+    "operationId": "getPipelineStepsForRepository",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the pipeline.",
+        "in": "path",
+        "name": "pipeline_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/",
+    "responses": {
+      "200": {
+        "description": "The steps.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_steps"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Step",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a given step of a pipeline.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D/steps/%7Bstep_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getPipelineStepForRepository",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the pipeline.",
+        "in": "path",
+        "name": "pipeline_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the step.",
+        "in": "path",
+        "name": "step_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}",
+    "responses": {
+      "200": {
+        "description": "The step.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_step"
+        }
+      },
+      "404": {
+        "description": "No account, repository, pipeline or step with the UUID provided exists for the pipeline with the UUID provided.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Step Log",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve the log file for a given step of a pipeline.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D/steps/%7Bstep_uuid%7D/log#get",
+    "method": "GET",
+    "operationId": "getPipelineStepLogForRepository",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the pipeline.",
+        "in": "path",
+        "name": "pipeline_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the step.",
+        "in": "path",
+        "name": "step_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log",
+    "produces": [
+      "application/octet-stream"
+    ],
+    "responses": {
+      "200": {
+        "description": "The raw log file for this pipeline step."
+      },
+      "304": {
+        "description": "The log has the same etag as the provided If-None-Match header.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "A pipeline with the given UUID does not exist, a step with the given UUID does not exist in the pipeline or a log file does not exist for the given step.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "416": {
+        "description": "The requested range does not exist for requests that specified the [HTTP Range header](https://tools.ietf.org/html/rfc7233#section-3.1).",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Stop",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Signal the stop of a pipeline and all of its steps that not have completed yet.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D/stopPipeline#post",
+    "method": "POST",
+    "operationId": "stopPipeline",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the pipeline.",
+        "in": "path",
+        "name": "pipeline_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline",
+    "responses": {
+      "204": {
+        "description": "The pipeline has been signaled to stop."
+      },
+      "400": {
+        "description": "The specified pipeline has already completed.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "Either the account, repository or pipeline with the given UUID does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Config",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve the repository pipelines configuration.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineConfig",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config",
+    "responses": {
+      "200": {
+        "description": "The repository pipelines configuration.",
+        "schema": {
+          "$ref": "#/definitions/pipelines_config"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Config",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update the pipelines configuration for a repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config#put",
+    "method": "PUT",
+    "operationId": "updateRepositoryPipelineConfig",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated repository pipelines configuration.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipelines_config"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config",
+    "responses": {
+      "200": {
+        "description": "The repository pipelines configuration was updated.",
+        "schema": {
+          "$ref": "#/definitions/pipelines_config"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Build Number",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update the next build number that should be assigned to a pipeline. The next build number that will be configured has to be strictly higher than the current latest build number for this repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/build_number#put",
+    "method": "PUT",
+    "operationId": "updateRepositoryBuildNumber",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The build number to update.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_build_number"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/build_number",
+    "responses": {
+      "200": {
+        "description": "The build number has been configured.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_build_number"
+        }
+      },
+      "400": {
+        "description": "The update failed because the next number was invalid (it should be higher than the current number).",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The account or repository was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Schedules",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve the configured schedules for the given repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineSchedules",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/",
+    "responses": {
+      "200": {
+        "description": "The list of schedules.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_schedules"
+        }
+      },
+      "404": {
+        "description": "The account or repository was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Schedule",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Create a schedule for the given repository.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/#post",
+    "method": "POST",
+    "operationId": "createRepositoryPipelineSchedule",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The schedule to create.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_schedule"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/",
+    "responses": {
+      "201": {
+        "description": "The created schedule.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_schedule"
+        }
+      },
+      "400": {
+        "description": "There were errors validating the request.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "401": {
+        "description": "The maximum limit of schedules for this repository was reached.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "The account or repository was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Schedule",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete a schedule.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/%7Bschedule_uuid%7D#delete",
+    "method": "DELETE",
+    "operationId": "deleteRepositoryPipelineSchedule",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The uuid of the schedule.",
+        "in": "path",
+        "name": "schedule_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}",
+    "responses": {
+      "204": {
+        "description": "The schedule was deleted."
+      },
+      "404": {
+        "description": "The account, repository or schedule was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Schedule",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a schedule by its UUID.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/%7Bschedule_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineSchedule",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The uuid of the schedule.",
+        "in": "path",
+        "name": "schedule_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}",
+    "responses": {
+      "200": {
+        "description": "The requested schedule.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_schedule"
+        }
+      },
+      "404": {
+        "description": "The account, repository or schedule was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Schedule",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update a schedule.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/%7Bschedule_uuid%7D#put",
+    "method": "PUT",
+    "operationId": "updateRepositoryPipelineSchedule",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The uuid of the schedule.",
+        "in": "path",
+        "name": "schedule_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The schedule to update.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_schedule"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}",
+    "responses": {
+      "200": {
+        "description": "The schedule is updated.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_schedule"
+        }
+      },
+      "404": {
+        "description": "The account, repository or schedule was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Schedule Executions",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve the executions of a given schedule.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/%7Bschedule_uuid%7D/executions/#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineScheduleExecutions",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/",
+    "responses": {
+      "200": {
+        "description": "The list of executions of a schedule.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_schedule_executions"
+        }
+      },
+      "404": {
+        "description": "The account or repository was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Ssh Key Pair",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete the repository SSH key pair.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/key_pair#delete",
+    "method": "DELETE",
+    "operationId": "deleteRepositoryPipelineKeyPair",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair",
+    "responses": {
+      "204": {
+        "description": "The SSH key pair was deleted."
+      },
+      "404": {
+        "description": "The account, repository or SSH key pair was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Ssh Key Pair",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve the repository SSH key pair excluding the SSH private key. The private key is a write only field and will never be exposed in the logs or the REST API.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/key_pair#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineSshKeyPair",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair",
+    "responses": {
+      "200": {
+        "description": "The SSH key pair.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_ssh_key_pair"
+        }
+      },
+      "404": {
+        "description": "The account, repository or SSH key pair was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Ssh Key Pair",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Create or update the repository SSH key pair. The private key will be set as a default SSH identity in your build container.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/key_pair#put",
+    "method": "PUT",
+    "operationId": "updateRepositoryPipelineKeyPair",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The created or updated SSH key pair.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_ssh_key_pair"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair",
+    "responses": {
+      "200": {
+        "description": "The SSH key pair was created or updated.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_ssh_key_pair"
+        }
+      },
+      "404": {
+        "description": "The account, repository or SSH key pair was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Known Hosts",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Find repository level known hosts.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/known_hosts/#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineKnownHosts",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/",
+    "responses": {
+      "200": {
+        "description": "The retrieved known hosts.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_known_hosts"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Known Host",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Create a repository level known host.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/known_hosts/#post",
+    "method": "POST",
+    "operationId": "createRepositoryPipelineKnownHost",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The known host to create.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_known_host"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/",
+    "responses": {
+      "201": {
+        "description": "The known host was created.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created pipeline known host.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/pipeline_known_host"
+        }
+      },
+      "404": {
+        "description": "The account or repository does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "409": {
+        "description": "A known host with the provided hostname already exists.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Known Host",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete a repository level known host.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/known_hosts/%7Bknown_host_uuid%7D#delete",
+    "method": "DELETE",
+    "operationId": "deleteRepositoryPipelineKnownHost",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the known host to delete.",
+        "in": "path",
+        "name": "known_host_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}",
+    "responses": {
+      "204": {
+        "description": "The known host was deleted."
+      },
+      "404": {
+        "description": "The account, repository or known host with given UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Known Host",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a repository level known host.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/known_hosts/%7Bknown_host_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineKnownHost",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the known host to retrieve.",
+        "in": "path",
+        "name": "known_host_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}",
+    "responses": {
+      "200": {
+        "description": "The known host.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_known_host"
+        }
+      },
+      "404": {
+        "description": "The account, repository or known host with the specified UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Known Host",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update a repository level known host.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/known_hosts/%7Bknown_host_uuid%7D#put",
+    "method": "PUT",
+    "operationId": "updateRepositoryPipelineKnownHost",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the known host to update.",
+        "in": "path",
+        "name": "known_host_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated known host.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_known_host"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}",
+    "responses": {
+      "200": {
+        "description": "The known host was updated.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_known_host"
+        }
+      },
+      "404": {
+        "description": "The account, repository or known host with the given UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Variables For Repo",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Find repository level variables.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/variables/#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineVariables",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/variables/",
+    "responses": {
+      "200": {
+        "description": "The retrieved variables.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_variables"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Create a repository level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/variables/#post",
+    "method": "POST",
+    "operationId": "createRepositoryPipelineVariable",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The variable to create.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/variables/",
+    "responses": {
+      "201": {
+        "description": "The variable was created.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created pipeline variable.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or repository does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "409": {
+        "description": "A variable with the provided key already exists.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete a repository level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/variables/%7Bvariable_uuid%7D#delete",
+    "method": "DELETE",
+    "operationId": "deleteRepositoryPipelineVariable",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to delete.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "204": {
+        "description": "The variable was deleted."
+      },
+      "404": {
+        "description": "The account, repository or variable with given UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a repository level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/variables/%7Bvariable_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getRepositoryPipelineVariable",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to retrieve.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account, repository or variable with the specified UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update a repository level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/variables/%7Bvariable_uuid%7D#put",
+    "method": "PUT",
+    "operationId": "updateRepositoryPipelineVariable",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The repository.",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to update.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated variable",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable was updated.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account, repository or variable with the given UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Variables For Team",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Find account level variables.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/#get",
+    "method": "GET",
+    "operationId": "getPipelineVariablesForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/",
+    "responses": {
+      "200": {
+        "description": "The found account level variables.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_variables"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Variable For Team",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Create an account level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/#post",
+    "method": "POST",
+    "operationId": "createPipelineVariableForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The variable to create.",
+        "in": "body",
+        "name": "_body",
+        "required": false,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/",
+    "responses": {
+      "201": {
+        "description": "The created variable.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created pipeline variable.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "409": {
+        "description": "A variable with the provided key already exists.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Variable For Team",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete a team level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#delete",
+    "method": "DELETE",
+    "operationId": "deletePipelineVariableForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to delete.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "204": {
+        "description": "The variable was deleted"
+      },
+      "404": {
+        "description": "The account or the variable with the provided UUID does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Variable For Team",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a team level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getPipelineVariableForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to retrieve.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or variable with the given UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Variable For Team",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update a team level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#put",
+    "method": "PUT",
+    "operationId": "updatePipelineVariableForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated variable.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable was updated.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or the variable was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Variables For User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Find user level variables.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/#get",
+    "method": "GET",
+    "operationId": "getPipelineVariablesForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/",
+    "responses": {
+      "200": {
+        "description": "The found user level variables.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_variables"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Variable For User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Create a user level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/#post",
+    "method": "POST",
+    "operationId": "createPipelineVariableForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The variable to create.",
+        "in": "body",
+        "name": "_body",
+        "required": false,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/",
+    "responses": {
+      "201": {
+        "description": "The created variable.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created pipeline variable.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "409": {
+        "description": "A variable with the provided key already exists.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Variable For User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete an account level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#delete",
+    "method": "DELETE",
+    "operationId": "deletePipelineVariableForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to delete.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "204": {
+        "description": "The variable was deleted"
+      },
+      "404": {
+        "description": "The account or the variable with the provided UUID does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Variable For User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a user level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getPipelineVariableForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to retrieve.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or variable with the given UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Variable For User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update a user level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#put",
+    "method": "PUT",
+    "operationId": "updatePipelineVariableForUser",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated variable.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/users/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable was updated.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or the variable was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

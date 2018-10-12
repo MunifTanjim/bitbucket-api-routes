@@ -1,0 +1,44 @@
+{
+  "name": "bitbucket-api-routes",
+  "version": "0.0.0",
+  "description": "Machine-readable, Bitbucket API routes specifications",
+  "keywords": [
+    "bitbucket",
+    "bitbucket-api"
+  ],
+  "homepage": "https://github.com/MunifTanjim/bitbucket-api-routes#readme",
+  "bugs": "https://github.com/MunifTanjim/bitbucket-api-routes/issues",
+  "license": "MIT",
+  "author": "MunifTanjim (https://muniftanjim.com)",
+  "files": [
+    "routes",
+    "specification"
+  ],
+  "main": "routes/index.json",
+  "repository": "github:MunifTanjim/bitbucket-api-routes",
+  "scripts": {
+    "check:specification": "bin/bitbucket-api-routes.js check --specification",
+    "check:api-names": "bin/bitbucket-api-routes.js check --api-names",
+    "check:routes": "bin/bitbucket-api-routes.js check --routes",
+    "update:specification": "bin/bitbucket-api-routes.js update --specification",
+    "update:api-names": "bin/bitbucket-api-routes.js update --api-names",
+    "update:routes": "bin/bitbucket-api-routes.js update --routes"
+  },
+  "devDependencies": {
+    "deep-sort-object": "^1.0.2",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "fs-extra": "^7.0.0",
+    "lodash": "^4.17.11",
+    "node-fetch": "^2.2.0",
+    "prettier": "^1.13.4",
+    "yargs": "^12.0.2"
+  },
+  "private": true
+}

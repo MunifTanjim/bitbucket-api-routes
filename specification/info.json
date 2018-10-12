@@ -1,0 +1,11 @@
+{
+  "contact": {
+    "email": "support@bitbucket.org",
+    "name": "Bitbucket Support",
+    "url": "https://support.atlassian.com/bitbucket-cloud/"
+  },
+  "description": "Code against the Bitbucket API to automate simple tasks, embed Bitbucket data into your own site, build mobile or desktop apps, or even add custom UI add-ons into Bitbucket itself using the Connect framework.",
+  "termsOfService": "https://www.atlassian.com/legal/customer-agreement",
+  "title": "Bitbucket API",
+  "version": "2.0"
+}

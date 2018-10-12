@@ -1,0 +1,28 @@
+{
+  "apiName": "List Variables For Team",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Find account level variables.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/#get",
+  "method": "GET",
+  "operationId": "getPipelineVariablesForTeam",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/teams/{username}/pipelines_config/variables/",
+  "responses": {
+    "200": {
+      "description": "The found account level variables.",
+      "schema": {
+        "$ref": "#/definitions/paginated_pipeline_variables"
+      }
+    }
+  }
+}

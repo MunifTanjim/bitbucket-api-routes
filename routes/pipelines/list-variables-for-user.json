@@ -1,0 +1,28 @@
+{
+  "apiName": "List Variables For User",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Find user level variables.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/#get",
+  "method": "GET",
+  "operationId": "getPipelineVariablesForUser",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/users/{username}/pipelines_config/variables/",
+  "responses": {
+    "200": {
+      "description": "The found user level variables.",
+      "schema": {
+        "$ref": "#/definitions/paginated_pipeline_variables"
+      }
+    }
+  }
+}

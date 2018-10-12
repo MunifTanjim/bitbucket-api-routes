@@ -1,0 +1,69 @@
+{
+  "apiName": "Delete Commit",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Deletes the snippet.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/%7Bnode_id%7D#delete",
+  "method": "DELETE",
+  "parameters": [
+    {
+      "description": "The snippet's id.",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "node_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}/{encoded_id}/{node_id}",
+  "responses": {
+    "204": {
+      "description": "If the snippet was deleted successfully."
+    },
+    "401": {
+      "description": "If the snippet is private and the request was not authenticated.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "403": {
+      "description": "If authenticated user does not have permission to delete the private snippet.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the snippet does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "405": {
+      "description": "If `{node_id}` is not the latest revision.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

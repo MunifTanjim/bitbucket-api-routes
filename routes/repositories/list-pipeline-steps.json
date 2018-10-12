@@ -1,0 +1,42 @@
+{
+  "apiName": "List Pipeline Steps",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Find steps for the given pipeline.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D/steps/#get",
+  "method": "GET",
+  "operationId": "getPipelineStepsForRepository",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the pipeline.",
+      "in": "path",
+      "name": "pipeline_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/",
+  "responses": {
+    "200": {
+      "description": "The steps.",
+      "schema": {
+        "$ref": "#/definitions/paginated_pipeline_steps"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "apiName": "Create Pipeline",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Endpoint to create and initiate a pipeline. \nThere are a couple of different options to initiate a pipeline, where the payload of the request will determine which type of pipeline will be instantiated.\n# Trigger a Pipeline for a branch\nOne way to trigger pipelines is by specifying the branch for which you want to trigger a pipeline. \nThe specified branch will be used to determine which pipeline definition from the `bitbucket-pipelines.yml` file will be applied to initiate the pipeline. The pipeline will then do a clone of the repository and checkout the latest revision of the specified branch.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/#post",
+  "method": "POST",
+  "operationId": "createPipelineForRepository",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The pipeline to initiate.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/pipeline"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines/",
+  "responses": {
+    "201": {
+      "description": "The initiated pipeline.",
+      "headers": {
+        "Location": {
+          "description": "The URL of the newly created pipeline.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/pipeline"
+      }
+    },
+    "400": {
+      "description": "The account or repository is not enabled, the yml file does not exist in the repository for the given revision, or the request body contained invalid properties.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The account or repository was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

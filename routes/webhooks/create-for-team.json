@@ -1,0 +1,45 @@
+{
+  "apiName": "Create For Team",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Creates a new webhook on the specified team.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/hooks#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/teams/{username}/hooks",
+  "responses": {
+    "201": {
+      "description": "The newly installed webhook.",
+      "headers": {
+        "Location": {
+          "description": "The URL of new newly created webhook.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/webhook_subscription"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user is not an admin on the specified team.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the specified team does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

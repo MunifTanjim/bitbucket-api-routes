@@ -1,0 +1,45 @@
+{
+  "apiName": "Delete Schedule",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Delete a schedule.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/%7Bschedule_uuid%7D#delete",
+  "method": "DELETE",
+  "operationId": "deleteRepositoryPipelineSchedule",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The uuid of the schedule.",
+      "in": "path",
+      "name": "schedule_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}",
+  "responses": {
+    "204": {
+      "description": "The schedule was deleted."
+    },
+    "404": {
+      "description": "The account, repository or schedule was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

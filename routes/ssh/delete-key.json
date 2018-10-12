@@ -1,0 +1,47 @@
+{
+  "apiName": "Delete Key",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Deletes a specific SSH public key from a user's account",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys/#delete",
+  "method": "DELETE",
+  "parameters": [
+    {
+      "description": "The account's username or UUID.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The SSH key's UUID value.",
+      "in": "path",
+      "name": "key_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/users/{username}/ssh-keys/{key_id}",
+  "responses": {
+    "204": {
+      "description": "The key has been deleted"
+    },
+    "403": {
+      "description": "If the current user does not have permission to add a key for the specified user"
+    },
+    "404": {
+      "description": "If the specified user does not exist",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

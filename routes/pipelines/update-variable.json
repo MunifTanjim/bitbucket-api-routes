@@ -1,0 +1,57 @@
+{
+  "apiName": "Update Variable",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Update a repository level variable.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/variables/%7Bvariable_uuid%7D#put",
+  "method": "PUT",
+  "operationId": "updateRepositoryPipelineVariable",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the variable to update.",
+      "in": "path",
+      "name": "variable_uuid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The updated variable",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/pipeline_variable"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}",
+  "responses": {
+    "200": {
+      "description": "The variable was updated.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_variable"
+      }
+    },
+    "404": {
+      "description": "The account, repository or variable with the given UUID was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

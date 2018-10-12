@@ -1,0 +1,79 @@
+{
+  "apiName": "Get Src",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "This endpoints is used to retrieve the contents of a single file,\nor the contents of a directory at a specified revision.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/src/%7Bnode%7D/%7Bpath%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "If 'meta' is provided, returns the (json) meta data for the contents of the file.  If 'rendered' is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. Since Git and Mercurial do not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file's actual contents.",
+      "enum": [
+        "meta",
+        "rendered"
+      ],
+      "in": "query",
+      "name": "format",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "Optional filter expression as per [filtering and sorting](../../../../../../meta/filtering).",
+      "in": "query",
+      "name": "q",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "Optional sorting parameter as per [filtering and sorting](../../../../../../meta/filtering#query-sort).",
+      "in": "query",
+      "name": "sort",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "node",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "path",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/src/{node}/{path}",
+  "responses": {
+    "200": {
+      "description": "If the path matches a file, then the raw contents of the file are\nreturned.  If the `format=meta` query parameter is provided,\na json document containing the file's meta data is\nreturned.  If the `format=rendered` query parameter is provided,\nthe contents of the file in HTML-formated rendered markup is returned.\nIf the path matches a directory, then a paginated\nlist of file and directory entries is returned (if the\n`format=meta` query parameter was provided, then the json document\ncontaining the directory's meta data is returned.)\n",
+      "schema": {
+        "$ref": "#/definitions/paginated_treeentries"
+      }
+    },
+    "404": {
+      "description": "If the path or commit in the URL does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

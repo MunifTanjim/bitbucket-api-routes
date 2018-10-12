@@ -1,0 +1,66 @@
+{
+  "apiName": "Update Commit Build Status",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Used to update the current status of a build status object on the\nspecific commit.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build/%7Bkey%7D#put",
+  "method": "PUT",
+  "parameters": [
+    {
+      "description": "The updated build status object",
+      "in": "body",
+      "name": "_body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/commitstatus"
+      }
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The commit's SHA1.",
+      "in": "path",
+      "name": "node",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The build status' unique key",
+      "in": "path",
+      "name": "key",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}",
+  "responses": {
+    "200": {
+      "description": "The updated build status object.",
+      "schema": {
+        "$ref": "#/definitions/commitstatus"
+      }
+    },
+    "401": {
+      "description": "If the repository is private and the request was not authenticated."
+    },
+    "404": {
+      "description": "If the repository or build does not exist",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

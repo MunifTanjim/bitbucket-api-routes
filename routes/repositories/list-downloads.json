@@ -1,0 +1,34 @@
+{
+  "apiName": "List Downloads",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a list of download links associated with the repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/downloads#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/downloads",
+  "responses": {
+    "default": {
+      "description": "Unexpected error.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

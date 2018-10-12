@@ -1,0 +1,55 @@
+{
+  "apiName": "Get Step",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve a given step of a pipeline.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D/steps/%7Bstep_uuid%7D#get",
+  "method": "GET",
+  "operationId": "getPipelineStepForRepository",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the pipeline.",
+      "in": "path",
+      "name": "pipeline_uuid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the step.",
+      "in": "path",
+      "name": "step_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}",
+  "responses": {
+    "200": {
+      "description": "The step.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_step"
+      }
+    },
+    "404": {
+      "description": "No account, repository, pipeline or step with the UUID provided exists for the pipeline with the UUID provided.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

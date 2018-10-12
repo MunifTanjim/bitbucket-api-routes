@@ -1,0 +1,43 @@
+{
+  "apiName": "List Ssh Keys",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a paginated list of the user's SSH public keys.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "The account's username or UUID.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/users/{username}/ssh-keys",
+  "responses": {
+    "200": {
+      "description": "A list of the SSH keys associated with the account.",
+      "schema": {
+        "$ref": "#/definitions/paginated_ssh_user_keys"
+      }
+    },
+    "403": {
+      "description": "If the specified user's keys are not accessible to the current user"
+    },
+    "404": {
+      "description": "If the specified user does not exist",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

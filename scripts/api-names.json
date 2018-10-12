@@ -1,0 +1,1139 @@
+{
+  "/addon": {
+    "delete": {
+      "addon": ""
+    },
+    "put": {
+      "addon": ""
+    }
+  },
+  "/addon/linkers": {
+    "get": {
+      "addon": ""
+    }
+  },
+  "/addon/linkers/{linker_key}": {
+    "get": {
+      "addon": ""
+    }
+  },
+  "/addon/linkers/{linker_key}/values": {
+    "delete": {
+      "addon": ""
+    },
+    "get": {
+      "addon": ""
+    },
+    "post": {
+      "addon": ""
+    },
+    "put": {
+      "addon": ""
+    }
+  },
+  "/addon/linkers/{linker_key}/values/": {
+    "delete": {
+      "addon": ""
+    },
+    "get": {
+      "addon": ""
+    }
+  },
+  "/addon/users/{target_user}/events/{event_key}": {
+    "post": {
+      "addon": ""
+    }
+  },
+  "/hook_events": {
+    "get": {
+      "hook_events": "Get All Subject Types",
+      "webhooks": "Get All Subject Types"
+    }
+  },
+  "/hook_events/{subject_type}": {
+    "get": {
+      "hook_events": "List",
+      "webhooks": "List"
+    }
+  },
+  "/pullrequests/{target_user}": {
+    "get": {
+      "pullrequests": ""
+    }
+  },
+  "/repositories": {
+    "get": {
+      "repositories": "List Public"
+    }
+  },
+  "/repositories/{username}": {
+    "get": {
+      "repositories": "List"
+    }
+  },
+  "/repositories/{username}/{repo_slug}": {
+    "delete": {
+      "repositories": "Delete"
+    },
+    "get": {
+      "repositories": "Get"
+    },
+    "post": {
+      "repositories": "Create"
+    },
+    "put": {
+      "repositories": "Update"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/branch-restrictions": {
+    "get": {
+      "branchrestrictions": "List",
+      "repositories": "List Branch Restrictions"
+    },
+    "post": {
+      "branchrestrictions": "Create",
+      "repositories": "Create Branch Restriction"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/branch-restrictions/{id}": {
+    "delete": {
+      "branchrestrictions": "Delete",
+      "repositories": "Delete Branch Restriction"
+    },
+    "get": {
+      "branchrestrictions": "Get",
+      "repositories": "Get Branch Restriction"
+    },
+    "put": {
+      "branchrestrictions": "Update",
+      "repositories": "Update Branch Restriction"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{node}": {
+    "get": {
+      "commits": "Get",
+      "repositories": "Get Commit"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{node}/approve": {
+    "delete": {
+      "commits": "Delete Approval",
+      "repositories": "Delete Commit Approval"
+    },
+    "post": {
+      "commits": "Create Approval",
+      "repositories": "Create Commit Approval"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{node}/comments": {
+    "get": {
+      "commits": "List Comments",
+      "repositories": "List Commit Comments"
+    },
+    "post": {
+      "commits": "Create Comment",
+      "repositories": "Create Commit Comment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{node}/comments/{comment_id}": {
+    "get": {
+      "commits": "Get Comment",
+      "repositories": "Get Commit Comment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{node}/statuses": {
+    "get": {
+      "commitstatuses": "List",
+      "repositories": "List Commit Statuses"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build": {
+    "post": {
+      "commitstatuses": "Create Build Status",
+      "repositories": "Create Commit Build Status"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commit/{node}/statuses/build/{key}": {
+    "get": {
+      "commitstatuses": "Get Build Status",
+      "repositories": "Get Commit Build Status"
+    },
+    "put": {
+      "commitstatuses": "Update Build Status",
+      "repositories": "Update Commit Build Status"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commits": {
+    "get": {
+      "commits": "List",
+      "repositories": "List Commits"
+    },
+    "post": {
+      "commits": "Fetch All",
+      "repositories": "Fetch All Commits"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/commits/{revision}": {
+    "get": {
+      "commits": "List For Revision",
+      "repositories": "List Commits For Revision"
+    },
+    "post": {
+      "commits": "Fetch All For Revision",
+      "repositories": "Fetch All Commits For Revision"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/components": {
+    "get": {
+      "issue_tracker": "List Components",
+      "repositories": "List Components"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/components/{component_id}": {
+    "get": {
+      "issue_tracker": "Get Component",
+      "repositories": "Get Issue Component"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/default-reviewers": {
+    "get": {
+      "pullrequests": "List Default Reviewers",
+      "repositories": "List Default Reviewers"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/default-reviewers/{target_username}": {
+    "delete": {
+      "pullrequests": "Delete Default Reviewer",
+      "repositories": "Delete Default Reviewer"
+    },
+    "get": {
+      "pullrequests": "Get Default Reviewer",
+      "repositories": "Get Default Reviewer"
+    },
+    "put": {
+      "pullrequests": "Add Default Reviewer",
+      "repositories": "Add Default Reviewer"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/deployments/": {
+    "get": {
+      "deployments": "List",
+      "repositories": "List Deployments"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/deployments/{deployment_uuid}": {
+    "get": {
+      "deployments": "Get",
+      "repositories": "Get Deployment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/diff/{spec}": {
+    "get": {
+      "commits": "Get Diff",
+      "repositories": "Get Diff"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/diffstat/{spec}": {
+    "get": {
+      "repositories": "List Diff Stats"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/downloads": {
+    "get": {
+      "downloads": "List",
+      "repositories": "List Downloads"
+    },
+    "post": {
+      "downloads": "Create",
+      "repositories": "Create Download"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/downloads/{filename}": {
+    "delete": {
+      "downloads": "Delete",
+      "repositories": "Delete Download"
+    },
+    "get": {
+      "downloads": "Get",
+      "repositories": "Get Download"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/environments/{environment_uuid}": {
+    "get": {
+      "deployments": "Get Environment",
+      "repositories": "Get Environment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}": {
+    "get": {
+      "repositories": "List File History",
+      "source": "List History"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/forks": {
+    "get": {
+      "repositories": "List Forks"
+    },
+    "post": {
+      "repositories": "Create Fork"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/hooks": {
+    "get": {
+      "repositories": "List Webhooks",
+      "webhooks": "List For Repo"
+    },
+    "post": {
+      "repositories": "Create Webhook",
+      "webhooks": "Create"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/hooks/{uid}": {
+    "delete": {
+      "repositories": "Delete Webhook",
+      "webhooks": "Delete"
+    },
+    "get": {
+      "repositories": "Get Webhook",
+      "webhooks": "Get"
+    },
+    "put": {
+      "repositories": "Update Webhook",
+      "webhooks": "Update"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues": {
+    "get": {
+      "issue_tracker": "List",
+      "repositories": "List Issues"
+    },
+    "post": {
+      "issue_tracker": "Create",
+      "repositories": "Create Issue"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}": {
+    "delete": {
+      "issue_tracker": "Delete",
+      "repositories": "Delete Issue"
+    },
+    "get": {
+      "issue_tracker": "Get",
+      "repositories": "Get Issue"
+    },
+    "put": {
+      "issue_tracker": "Update",
+      "repositories": "Update Issue"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments": {
+    "get": {
+      "issue_tracker": "List Attachments",
+      "repositories": "List Issue Attachments"
+    },
+    "post": {
+      "issue_tracker": "Create Attachments",
+      "repositories": "Create Issue Attachments"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments/{path}": {
+    "delete": {
+      "issue_tracker": "Delete Attachment",
+      "repositories": "Delete Issue Attachment"
+    },
+    "get": {
+      "issue_tracker": "Get Attachment",
+      "repositories": "Get Issue Attachment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes": {
+    "get": {
+      "issue_tracker": "List Changes",
+      "repositories": "List Issue Changes"
+    },
+    "post": {
+      "issue_tracker": "Create Change",
+      "repositories": "Create Issue Change"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/changes/{change_id}": {
+    "get": {
+      "issue_tracker": "Get Change",
+      "repositories": "Get Issue Change"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments": {
+    "get": {
+      "issue_tracker": "List Comments",
+      "repositories": "List Issue Comments"
+    },
+    "post": {
+      "issue_tracker": "Create Comment",
+      "repositories": "Create Issue Comment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/comments/{comment_id}": {
+    "delete": {
+      "issue_tracker": "Delete Comment",
+      "repositories": "Delete Issue Comment"
+    },
+    "get": {
+      "issue_tracker": "Get Comment",
+      "repositories": "Get Issue Comment"
+    },
+    "put": {
+      "issue_tracker": "Update Comment",
+      "repositories": "Update Issue Comment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/vote": {
+    "delete": {
+      "issue_tracker": "Delete Vote",
+      "repositories": "Delete Issue Vote"
+    },
+    "get": {
+      "issue_tracker": "Get Vote",
+      "repositories": "Get Issue Vote"
+    },
+    "put": {
+      "issue_tracker": "Create Vote",
+      "repositories": "Create Issue Vote"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/issues/{issue_id}/watch": {
+    "delete": {
+      "issue_tracker": "Delete Watch",
+      "repositories": "Delete Issue Watch"
+    },
+    "get": {
+      "issue_tracker": "Get Watch",
+      "repositories": "Get Issue Watch"
+    },
+    "put": {
+      "issue_tracker": "Create Watch",
+      "repositories": "Create Issue Watch"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/milestones": {
+    "get": {
+      "issue_tracker": "List Milestones",
+      "repositories": "List Milestones"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/milestones/{milestone_id}": {
+    "get": {
+      "issue_tracker": "Get Milestone",
+      "repositories": "Get Issue Milestone"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/patch/{spec}": {
+    "get": {
+      "commits": "Get Patch",
+      "repositories": "Get Patch"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config": {
+    "get": {
+      "pipelines": "Get Config",
+      "repositories": "Get Pipeline Config"
+    },
+    "put": {
+      "pipelines": "Update Config",
+      "repositories": "Update Pipeline Config"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/build_number": {
+    "put": {
+      "pipelines": "Update Build Number",
+      "repositories": "Update Pipeline Build Number"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/schedules/": {
+    "get": {
+      "pipelines": "List Schedules",
+      "repositories": "List Pipeline Schedules"
+    },
+    "post": {
+      "pipelines": "Create Schedule",
+      "repositories": "Create Pipeline Schedule"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}": {
+    "delete": {
+      "pipelines": "Delete Schedule",
+      "repositories": "Delete Pipeline Schedule"
+    },
+    "get": {
+      "pipelines": "Get Schedule",
+      "repositories": "Get Pipeline Schedule"
+    },
+    "put": {
+      "pipelines": "Update Schedule",
+      "repositories": "Update Pipeline Schedule"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}/executions/": {
+    "get": {
+      "pipelines": "List Schedule Executions",
+      "repositories": "List Pipeline Schedule Executions"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/ssh/key_pair": {
+    "delete": {
+      "pipelines": "Delete Ssh Key Pair",
+      "repositories": "Delete Pipeline Ssh Key Pair"
+    },
+    "get": {
+      "pipelines": "Get Ssh Key Pair",
+      "repositories": "Get Pipeline Ssh Key Pair"
+    },
+    "put": {
+      "pipelines": "Update Ssh Key Pair",
+      "repositories": "Update Pipeline Ssh Key Pair"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/": {
+    "get": {
+      "pipelines": "List Known Hosts",
+      "repositories": "List Pipeline Known Hosts"
+    },
+    "post": {
+      "pipelines": "Create Known Host",
+      "repositories": "Create Pipeline Known Host"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}": {
+    "delete": {
+      "pipelines": "Delete Known Host",
+      "repositories": "Delete Pipeline Known Host"
+    },
+    "get": {
+      "pipelines": "Get Known Host",
+      "repositories": "Get Pipeline Known Host"
+    },
+    "put": {
+      "pipelines": "Update Known Host",
+      "repositories": "Update Pipeline Known Host"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/variables/": {
+    "get": {
+      "pipelines": "List Variables For Repo",
+      "repositories": "List Pipeline Variables"
+    },
+    "post": {
+      "pipelines": "Create Variable",
+      "repositories": "Create Pipeline Variable"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines_config/variables/{variable_uuid}": {
+    "delete": {
+      "pipelines": "Delete Variable",
+      "repositories": "Delete Pipeline Variable"
+    },
+    "get": {
+      "pipelines": "Get Variable",
+      "repositories": "Get Pipeline Variable"
+    },
+    "put": {
+      "pipelines": "Update Variable",
+      "repositories": "Update Pipeline Variable"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/": {
+    "get": {
+      "pipelines": "List",
+      "repositories": "List Pipelines"
+    },
+    "post": {
+      "pipelines": "Create",
+      "repositories": "Create Pipeline"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}": {
+    "get": {
+      "pipelines": "Get",
+      "repositories": "Get Pipeline"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/": {
+    "get": {
+      "pipelines": "List Steps",
+      "repositories": "List Pipeline Steps"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}": {
+    "get": {
+      "pipelines": "Get Step",
+      "repositories": "Get Pipeline Step"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/steps/{step_uuid}/log": {
+    "get": {
+      "pipelines": "Get Step Log",
+      "repositories": "Get Pipeline Step Log"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline": {
+    "post": {
+      "pipelines": "Stop",
+      "repositories": "Stop Pipeline"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/properties/{app_key}/{property_name}": {
+    "delete": {
+      "repositories": ""
+    },
+    "get": {
+      "repositories": ""
+    },
+    "put": {
+      "repositories": ""
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests": {
+    "get": {
+      "pullrequests": "List",
+      "repositories": "List Pull Requests"
+    },
+    "post": {
+      "pullrequests": "Create",
+      "repositories": "Create Pull Request"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}": {
+    "get": {
+      "pullrequests": "Get",
+      "repositories": "Get Pull Request"
+    },
+    "put": {
+      "pullrequests": "Update",
+      "repositories": "Update Pull Request"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/activity": {
+    "get": {
+      "pullrequests": "Get Activity Log",
+      "repositories": "Get Pull Request Activity Log"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/approve": {
+    "delete": {
+      "pullrequests": "Delete Approval",
+      "repositories": "Delete Pull Request Approval"
+    },
+    "post": {
+      "pullrequests": "Create Approval",
+      "repositories": "Create Pull Request Approval"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments": {
+    "get": {
+      "pullrequests": "List Comments",
+      "repositories": "List Pull Request Comments"
+    },
+    "post": {
+      "pullrequests": "Create Comment",
+      "repositories": "Create Pull Request Comment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/comments/{comment_id}": {
+    "delete": {
+      "pullrequests": "Delete Comment",
+      "repositories": "Delete Pull Request Comment"
+    },
+    "get": {
+      "pullrequests": "Get Comment",
+      "repositories": "Get Pull Request Comment"
+    },
+    "put": {
+      "pullrequests": "Update Comment",
+      "repositories": "Update Pull Request Comment"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/commits": {
+    "get": {
+      "pullrequests": "List Commits",
+      "repositories": "List Pull Request Commits"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/decline": {
+    "post": {
+      "pullrequests": "Decline",
+      "repositories": "Decline Pull Request"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diff": {
+    "get": {
+      "pullrequests": "Get Diff",
+      "repositories": "Get Pull Request Diff"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/diffstat": {
+    "get": {
+      "pullrequests": "Get Diff Stat",
+      "repositories": "Get Pull Request Diff Stat"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/merge": {
+    "post": {
+      "pullrequests": "Merge",
+      "repositories": "Merge Pull Request"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/patch": {
+    "get": {
+      "pullrequests": "Get Patch",
+      "repositories": "Get Pull Request Patch"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/{pull_request_id}/statuses": {
+    "get": {
+      "commitstatuses": "List Pull Request Statuses",
+      "pullrequests": "List Statuses",
+      "repositories": "List Pull Request Statuses"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/pullrequests/activity": {
+    "get": {
+      "pullrequests": "List Activity Log",
+      "repositories": "List Pull Requests Activity Log"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/refs": {
+    "get": {
+      "refs": "List",
+      "repositories": "List Refs"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/refs/branches": {
+    "get": {
+      "refs": "List Branches",
+      "repositories": "List Branches"
+    },
+    "post": {
+      "refs": "Create Branch",
+      "repositories": "Create Branch"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/refs/branches/{name}": {
+    "delete": {
+      "refs": "Delete Branch",
+      "repositories": "Delete Branch"
+    },
+    "get": {
+      "refs": "Get Branch",
+      "repositories": "Get Branch"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/refs/tags": {
+    "get": {
+      "refs": "List Tags",
+      "repositories": "List Tags"
+    },
+    "post": {
+      "refs": "Create Tag",
+      "repositories": "Create Tag"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/refs/tags/{name}": {
+    "delete": {
+      "refs": "Delete Tag",
+      "repositories": "Delete Tag"
+    },
+    "get": {
+      "refs": "Get Tag",
+      "repositories": "Get Tag"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/src": {
+    "get": {
+      "repositories": "Get Src Main Root",
+      "source": "Get Main Root"
+    },
+    "post": {
+      "repositories": "Create Src File Commit",
+      "source": "Create File Commit"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/src/{node}/{path}": {
+    "get": {
+      "repositories": "Get Src",
+      "source": "Get"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/versions": {
+    "get": {
+      "issue_tracker": "List Versions",
+      "repositories": "List Versions"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/versions/{version_id}": {
+    "get": {
+      "issue_tracker": "Get Version",
+      "repositories": "Get Issue Version"
+    }
+  },
+  "/repositories/{username}/{repo_slug}/watchers": {
+    "get": {
+      "repositories": "List Watchers"
+    }
+  },
+  "/snippets": {
+    "get": {
+      "snippets": "List"
+    },
+    "post": {
+      "snippets": "Create"
+    }
+  },
+  "/snippets/{username}": {
+    "get": {
+      "snippets": "List For User"
+    },
+    "post": {
+      "snippets": "Create For User"
+    }
+  },
+  "/snippets/{username}/{encoded_id}": {
+    "delete": {
+      "snippets": "Delete"
+    },
+    "get": {
+      "snippets": "Get"
+    },
+    "put": {
+      "snippets": "Update"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/{node_id}": {
+    "delete": {
+      "snippets": "Delete Commit"
+    },
+    "get": {
+      "snippets": "Get Commit"
+    },
+    "put": {
+      "snippets": "Update Commit"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/{node_id}/files/{path}": {
+    "get": {
+      "snippets": "Get File"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/{revision}/diff": {
+    "get": {
+      "snippets": "Get Diff"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/{revision}/patch": {
+    "get": {
+      "snippets": "Get Patch"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/comments": {
+    "get": {
+      "snippets": "List Comments"
+    },
+    "post": {
+      "snippets": "Create Comment"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/comments/{comment_id}": {
+    "delete": {
+      "snippets": "Delete Comment"
+    },
+    "get": {
+      "snippets": "Get Comment"
+    },
+    "put": {
+      "snippets": "Update Comment"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/commits": {
+    "get": {
+      "snippets": "List Commits"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/commits/{revision}": {
+    "get": {
+      "snippets": "List Commits For Revision"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/files/{path}": {
+    "get": {
+      "snippet": "Get Raw Files",
+      "snippets": "Get Raw Files"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/watch": {
+    "delete": {
+      "snippets": "Stop Watch"
+    },
+    "get": {
+      "snippets": "Check Watch"
+    },
+    "put": {
+      "snippets": "Start Watch"
+    }
+  },
+  "/snippets/{username}/{encoded_id}/watchers": {
+    "get": {
+      "snippets": "List Watchers"
+    }
+  },
+  "/teams": {
+    "get": {
+      "teams": "List"
+    }
+  },
+  "/teams/{username}": {
+    "get": {
+      "teams": "Get"
+    }
+  },
+  "/teams/{username}/followers": {
+    "get": {
+      "teams": "List Followers"
+    }
+  },
+  "/teams/{username}/following": {
+    "get": {
+      "teams": "List Following"
+    }
+  },
+  "/teams/{username}/hooks": {
+    "get": {
+      "teams": "List Webhooks",
+      "webhooks": "List For Team"
+    },
+    "post": {
+      "teams": "Create Webhook",
+      "webhooks": "Create For Team"
+    }
+  },
+  "/teams/{username}/hooks/{uid}": {
+    "delete": {
+      "teams": "Delete Webhook",
+      "webhooks": "Delete For Team"
+    },
+    "get": {
+      "teams": "Get Webhook",
+      "webhooks": "Get For Team"
+    },
+    "put": {
+      "teams": "Update Webhook",
+      "webhooks": "Update For Team"
+    }
+  },
+  "/teams/{username}/members": {
+    "get": {
+      "teams": "List Members"
+    }
+  },
+  "/teams/{username}/permissions": {
+    "get": {
+      "teams": "List Team Permissions"
+    }
+  },
+  "/teams/{username}/permissions/repositories": {
+    "get": {
+      "teams": "List Repository Permissions"
+    }
+  },
+  "/teams/{username}/pipelines_config/variables/": {
+    "get": {
+      "pipelines": "List Variables For Team",
+      "teams": "List Pipeline Variables"
+    },
+    "post": {
+      "pipelines": "Create Variable For Team",
+      "teams": "Create Pipeline Variable"
+    }
+  },
+  "/teams/{username}/pipelines_config/variables/{variable_uuid}": {
+    "delete": {
+      "pipelines": "Delete Variable For Team",
+      "teams": "Delete Pipeline Variable"
+    },
+    "get": {
+      "pipelines": "Get Variable For Team",
+      "teams": "Get Pipeline Variable"
+    },
+    "put": {
+      "pipelines": "Update Variable For Team",
+      "teams": "Update Pipeline Variable"
+    }
+  },
+  "/teams/{username}/projects/": {
+    "get": {
+      "projects": "List For Team",
+      "teams": "List Projects"
+    },
+    "post": {
+      "projects": "Create For Team",
+      "teams": "Create Project"
+    }
+  },
+  "/teams/{username}/projects/{project_key}": {
+    "delete": {
+      "projects": "Delete For Team",
+      "teams": "Delete Project"
+    },
+    "get": {
+      "projects": "Get For Team",
+      "teams": "Get Project"
+    },
+    "put": {
+      "projects": "Update For Team",
+      "teams": "Update Project"
+    }
+  },
+  "/teams/{username}/repositories": {
+    "get": {
+      "teams": "List Repositories",
+      "users": "List Repositories For Team"
+    }
+  },
+  "/teams/{username}/search/code": {
+    "get": {
+      "search": "Code Of Team",
+      "teams": "Search Code"
+    }
+  },
+  "/user": {
+    "get": {
+      "user": "Get",
+      "users": "Get Authed User"
+    }
+  },
+  "/user/emails": {
+    "get": {
+      "user": "List Emails",
+      "users": "List Emails For Authed User"
+    }
+  },
+  "/user/emails/{email}": {
+    "get": {
+      "user": "Get Email",
+      "users": "Get Email For Authed User"
+    }
+  },
+  "/user/permissions/repositories": {
+    "get": {
+      "repositories": "List Permissions",
+      "user": "List Repository Permissions"
+    }
+  },
+  "/user/permissions/teams": {
+    "get": {
+      "user": "List Team Permissions"
+    }
+  },
+  "/users/{username}": {
+    "get": {
+      "users": "Get"
+    }
+  },
+  "/users/{username}/followers": {
+    "get": {
+      "users": "List Followers"
+    }
+  },
+  "/users/{username}/following": {
+    "get": {
+      "users": "List Following"
+    }
+  },
+  "/users/{username}/hooks": {
+    "get": {
+      "users": "List Webhooks",
+      "webhooks": "List For User"
+    },
+    "post": {
+      "users": "Create Webhook",
+      "webhooks": "Create For User"
+    }
+  },
+  "/users/{username}/hooks/{uid}": {
+    "delete": {
+      "users": "Delete Webhook",
+      "webhooks": "Delete For User"
+    },
+    "get": {
+      "users": "Get Webhook",
+      "webhooks": "Get For User"
+    },
+    "put": {
+      "users": "Update Webhook",
+      "webhooks": "Update For User"
+    }
+  },
+  "/users/{username}/members": {
+    "get": {
+      "teams": "Get Members",
+      "users": "Get Team Members"
+    }
+  },
+  "/users/{username}/pipelines_config/variables/": {
+    "get": {
+      "pipelines": "List Variables For User",
+      "users": "List Pipeline Variables"
+    },
+    "post": {
+      "pipelines": "Create Variable For User",
+      "users": "Create Pipeline Variable"
+    }
+  },
+  "/users/{username}/pipelines_config/variables/{variable_uuid}": {
+    "delete": {
+      "pipelines": "Delete Variable For User",
+      "users": "Delete Pipeline Variable"
+    },
+    "get": {
+      "pipelines": "Get Variable For User",
+      "users": "Get Pipeline Variable"
+    },
+    "put": {
+      "pipelines": "Update Variable For User",
+      "users": "Update Pipeline Variable"
+    }
+  },
+  "/users/{username}/repositories": {
+    "get": {
+      "teams": "List Repositories For User",
+      "users": "List Repositories"
+    }
+  },
+  "/users/{username}/search/code": {
+    "get": {
+      "search": "Code Of User",
+      "users": "Search Code"
+    }
+  },
+  "/users/{username}/ssh-keys": {
+    "get": {
+      "ssh": "List Keys",
+      "users": "List Ssh Keys"
+    },
+    "post": {
+      "ssh": "Create Key",
+      "users": "Create Ssh Key"
+    }
+  },
+  "/users/{username}/ssh-keys/{key_id}": {
+    "delete": {
+      "ssh": "Delete Key",
+      "users": "Delete Ssh Key"
+    },
+    "get": {
+      "ssh": "Get Key",
+      "users": "Get Ssh Key"
+    },
+    "put": {
+      "ssh": "Update Key",
+      "users": "Update Ssh Key"
+    }
+  }
+}

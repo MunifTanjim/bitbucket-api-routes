@@ -1,0 +1,69 @@
+{
+  "apiName": "List",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns all pull requests on the specified repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pullrequests#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "Only return pull requests that are in this state. This parameter can be repeated.",
+      "enum": [
+        "MERGED",
+        "SUPERSEDED",
+        "OPEN",
+        "DECLINED"
+      ],
+      "in": "query",
+      "name": "state",
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pullrequests",
+  "responses": {
+    "200": {
+      "description": "All pull requests on the specified repository.",
+      "schema": {
+        "$ref": "#/definitions/paginated_pullrequests"
+      }
+    },
+    "401": {
+      "description": "If the repository is private and the request was not authenticated."
+    },
+    "404": {
+      "description": "If the specified repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

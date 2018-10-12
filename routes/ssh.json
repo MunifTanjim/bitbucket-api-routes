@@ -1,0 +1,265 @@
+[
+  {
+    "apiName": "List Keys",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a paginated list of the user's SSH public keys.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys",
+    "responses": {
+      "200": {
+        "description": "A list of the SSH keys associated with the account.",
+        "schema": {
+          "$ref": "#/definitions/paginated_ssh_user_keys"
+        }
+      },
+      "403": {
+        "description": "If the specified user's keys are not accessible to the current user"
+      },
+      "404": {
+        "description": "If the specified user does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Key",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Adds a new SSH public key to the specified user account and returns the resulting key.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The new SSH key object",
+        "in": "body",
+        "name": "_body",
+        "required": false,
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys",
+    "responses": {
+      "201": {
+        "description": "The newly created SSH key.",
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      "400": {
+        "description": "If the submitted key or related value is invalid",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If the current user does not have permission to add a key for the specified user"
+      },
+      "404": {
+        "description": "If the specified user does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Key",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes a specific SSH public key from a user's account",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys/#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The SSH key's UUID value.",
+        "in": "path",
+        "name": "key_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys/{key_id}",
+    "responses": {
+      "204": {
+        "description": "The key has been deleted"
+      },
+      "403": {
+        "description": "If the current user does not have permission to add a key for the specified user"
+      },
+      "404": {
+        "description": "If the specified user does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Key",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a specific SSH public key belonging to a user.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys/#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The SSH key's UUID value.",
+        "in": "path",
+        "name": "key_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys/{key_id}",
+    "responses": {
+      "200": {
+        "description": "The specific SSH key matching the user and UUID",
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      "403": {
+        "description": "If the specified user or key is not accessible to the current user"
+      },
+      "404": {
+        "description": "If the specified user or key does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Key",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Updates a specific SSH public key on a user's account",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys/#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "The account's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The SSH key's UUID value.",
+        "in": "path",
+        "name": "key_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated SSH key object",
+        "in": "body",
+        "name": "_body",
+        "required": false,
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/ssh-keys/{key_id}",
+    "responses": {
+      "200": {
+        "description": "The newly updated SSH key.",
+        "schema": {
+          "$ref": "#/definitions/ssh_account_key"
+        }
+      },
+      "400": {
+        "description": "If the submitted key or related value is invalid",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If the current user does not have permission to add a key for the specified user"
+      },
+      "404": {
+        "description": "If the specified user does not exist",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

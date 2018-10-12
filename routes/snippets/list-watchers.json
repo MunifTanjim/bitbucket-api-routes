@@ -1,0 +1,48 @@
+{
+  "apiName": "List Watchers",
+  "consumes": [
+    "application/json"
+  ],
+  "deprecated": true,
+  "description": "Returns a paginated list of all users watching a specific snippet.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/watchers#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "The snippet id.",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}/{encoded_id}/watchers",
+  "responses": {
+    "200": {
+      "description": "The paginated list of users watching this snippet",
+      "schema": {
+        "$ref": "#/definitions/paginated_users"
+      }
+    },
+    "404": {
+      "description": "If the snippet does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

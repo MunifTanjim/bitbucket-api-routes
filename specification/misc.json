@@ -1,0 +1,15 @@
+{
+  "basePath": "/2.0",
+  "consumes": [
+    "application/json"
+  ],
+  "host": "api.bitbucket.org",
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "x-revision": "5768d0527537"
+}

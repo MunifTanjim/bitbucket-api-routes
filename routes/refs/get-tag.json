@@ -1,0 +1,53 @@
+{
+  "apiName": "Get Tag",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the specified tag.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/tags/%7Bname%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The name of the tag.",
+      "in": "path",
+      "name": "name",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/refs/tags/{name}",
+  "responses": {
+    "200": {
+      "description": "The tag object.",
+      "schema": {
+        "$ref": "#/definitions/tag"
+      }
+    },
+    "403": {
+      "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The specified repository or tag does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

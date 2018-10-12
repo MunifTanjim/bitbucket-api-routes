@@ -1,0 +1,50 @@
+{
+  "apiName": "Delete Branch",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Delete a branch in the specified repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/branches/%7Bname%7D#delete",
+  "method": "DELETE",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The name of the branch.",
+      "in": "path",
+      "name": "name",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/refs/branches/{name}",
+  "responses": {
+    "204": {
+      "description": "Indicates that the specified branch was successfully deleted."
+    },
+    "403": {
+      "description": "If the repository is private and the authenticated user does not have\naccess to it.\n",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The specified repository or branch does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

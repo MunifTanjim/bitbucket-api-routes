@@ -1,0 +1,51 @@
+{
+  "apiName": "Stop",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Signal the stop of a pipeline and all of its steps that not have completed yet.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines/%7Bpipeline_uuid%7D/stopPipeline#post",
+  "method": "POST",
+  "operationId": "stopPipeline",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the pipeline.",
+      "in": "path",
+      "name": "pipeline_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines/{pipeline_uuid}/stopPipeline",
+  "responses": {
+    "204": {
+      "description": "The pipeline has been signaled to stop."
+    },
+    "400": {
+      "description": "The specified pipeline has already completed.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "Either the account, repository or pipeline with the given UUID does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

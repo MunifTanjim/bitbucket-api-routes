@@ -1,0 +1,57 @@
+{
+  "apiName": "Update Schedule",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Update a schedule.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/%7Bschedule_uuid%7D#put",
+  "method": "PUT",
+  "operationId": "updateRepositoryPipelineSchedule",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The uuid of the schedule.",
+      "in": "path",
+      "name": "schedule_uuid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The schedule to update.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/pipeline_schedule"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/{schedule_uuid}",
+  "responses": {
+    "200": {
+      "description": "The schedule is updated.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_schedule"
+      }
+    },
+    "404": {
+      "description": "The account, repository or schedule was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

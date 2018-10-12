@@ -1,0 +1,27 @@
+{
+  "apiName": "List Public",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a paginated list of all public repositories.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "Filter the results to include only repositories create on or after this [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601)  timestamp. Example: `YYYY-MM-DDTHH:mm:ss.sssZ`",
+      "in": "query",
+      "name": "after",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories",
+  "responses": {
+    "200": {
+      "description": "All public repositories.",
+      "schema": {
+        "$ref": "#/definitions/paginated_repositories"
+      }
+    }
+  }
+}

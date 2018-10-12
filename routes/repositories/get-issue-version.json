@@ -1,0 +1,47 @@
+{
+  "apiName": "Get Issue Version",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the specified issue tracker version object.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/versions/%7Bversion_id%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The version's id",
+      "in": "path",
+      "name": "version_id",
+      "required": true,
+      "type": "integer"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/versions/{version_id}",
+  "responses": {
+    "200": {
+      "description": "The specified version object.",
+      "schema": {
+        "$ref": "#/definitions/version"
+      }
+    },
+    "404": {
+      "description": "The specified repository or version does not exist or does not have the issue tracker enabled.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

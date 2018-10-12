@@ -1,0 +1,151 @@
+{
+  "apiName": "Create Fork",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Creates a new fork of the specified repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/forks#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "A repository object. This can be left blank.",
+      "in": "body",
+      "name": "_body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/repository"
+      }
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/forks",
+  "responses": {
+    "201": {
+      "description": "The newly created fork.",
+      "examples": {
+        "application/json": {
+          "created_on": "2018-06-20T23:17:33.616037+00:00",
+          "description": "A repository for my bits and bobs",
+          "fork_policy": "allow_forks",
+          "full_name": "example-username/bits_and_bobs",
+          "has_issues": false,
+          "has_wiki": false,
+          "is_private": true,
+          "language": "python",
+          "links": {
+            "avatar": {
+              "href": "https://bytebucket.org/ravatar/%7B7708d810-964c-403f-aa6d-4e949280d614%7D?ts=python"
+            },
+            "branches": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/refs/branches"
+            },
+            "clone": [
+              {
+                "href": "https://bitbucket.org/example-username/bits_and_bobs.git",
+                "name": "https"
+              },
+              {
+                "href": "git@bitbucket.org:example-username/bits_and_bobs.git",
+                "name": "ssh"
+              }
+            ],
+            "commits": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/commits"
+            },
+            "downloads": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/downloads"
+            },
+            "forks": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/forks"
+            },
+            "html": {
+              "href": "https://bitbucket.org/example-username/bits_and_bobs"
+            },
+            "pullrequests": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/pullrequests"
+            },
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs"
+            },
+            "source": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/src"
+            },
+            "tags": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/refs/tags"
+            },
+            "watchers": {
+              "href": "https://api.bitbucket.org/2.0/repositories/example-username/bits_and_bobs/watchers"
+            }
+          },
+          "mainbranch": {
+            "name": "master",
+            "type": "branch"
+          },
+          "name": "bits_and_bobs",
+          "owner": {
+            "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+            "display_name": "Example Username",
+            "links": {
+              "avatar": {
+                "href": "https://bitbucket.org/account/example-username/avatar/"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username"
+              }
+            },
+            "nickname": "example-username",
+            "type": "user",
+            "username": "example-username",
+            "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+          },
+          "scm": "git",
+          "size": 33348,
+          "slug": "bits_and_bobs",
+          "type": "repository",
+          "updated_on": "2018-06-20T23:17:33.616037+00:00",
+          "uuid": "{7708d810-964c-403f-aa6d-4e949280d614}",
+          "website": "www.example.com"
+        }
+      },
+      "headers": {
+        "Location": {
+          "description": "The URL of the newly created fork",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/repository"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "apiName": "Create Pipeline Known Host",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Create a repository level known host.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/known_hosts/#post",
+  "method": "POST",
+  "operationId": "createRepositoryPipelineKnownHost",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The known host to create.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/pipeline_known_host"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/",
+  "responses": {
+    "201": {
+      "description": "The known host was created.",
+      "headers": {
+        "Location": {
+          "description": "The URL of the newly created pipeline known host.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/pipeline_known_host"
+      }
+    },
+    "404": {
+      "description": "The account or repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "409": {
+      "description": "A known host with the provided hostname already exists.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

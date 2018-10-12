@@ -1,0 +1,48 @@
+{
+  "apiName": "List Commits",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "These are the repository's commits. They are paginated and returned\nin reverse chronological order, similar to the output of `git log` and\n`hg log`. Like these tools, the DAG can be filtered.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/commits#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "query",
+      "name": "include",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "query",
+      "name": "exclude",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/commits",
+  "responses": {
+    "default": {
+      "description": "Unexpected error.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

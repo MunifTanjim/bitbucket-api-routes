@@ -1,0 +1,1208 @@
+[
+  {
+    "apiName": "List",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns all the teams that the authenticated user is associated\nwith.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": " Filters the teams based on the authenticated user's role on each team.",
+        "enum": [
+          "admin",
+          "contributor",
+          "member"
+        ],
+        "in": "query",
+        "name": "role",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "path": "/teams",
+    "responses": {
+      "200": {
+        "description": "A paginated list of teams.",
+        "schema": {
+          "$ref": "#/definitions/paginated_teams"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Gets the public information associated with a team.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The team's username or UUID.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}",
+    "responses": {
+      "200": {
+        "description": "The team object",
+        "schema": {
+          "$ref": "#/definitions/team"
+        }
+      },
+      "404": {
+        "description": "If no team exists for the specified name or UUID, or if the specified account is a personal account, not a team account.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Followers",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the list of accounts that are following this team.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/followers#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The team's username",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/followers",
+    "responses": {
+      "200": {
+        "description": "A paginated list of user objects.",
+        "schema": {
+          "$ref": "#/definitions/paginated_users"
+        }
+      },
+      "404": {
+        "description": "If no team exists for the specified name, or if the specified account is a personal account, not a team account.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Following",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the list of accounts this team is following.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/following#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The team's username",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/following",
+    "responses": {
+      "200": {
+        "description": "A paginated list of user objects.",
+        "schema": {
+          "$ref": "#/definitions/paginated_users"
+        }
+      },
+      "404": {
+        "description": "If no team exists for the specified name, or if the specified account is a personal account, not a team account.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Webhooks",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a paginated list of webhooks installed on this team.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/hooks#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/hooks",
+    "responses": {
+      "200": {
+        "description": "The paginated list of installed webhooks.",
+        "schema": {
+          "$ref": "#/definitions/paginated_webhook_subscriptions"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user is not an admin on the specified team.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the specified team does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Webhook",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new webhook on the specified team.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/hooks#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/hooks",
+    "responses": {
+      "201": {
+        "description": "The newly installed webhook.",
+        "headers": {
+          "Location": {
+            "description": "The URL of new newly created webhook.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/webhook_subscription"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user is not an admin on the specified team.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the specified team does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Webhook",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes the specified webhook subscription from the given team\naccount.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/hooks/%7Buid%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "The installed webhook's id",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/hooks/{uid}",
+    "responses": {
+      "204": {
+        "description": "When the webhook was deleted successfully"
+      },
+      "403": {
+        "description": "If the authenticated user does not have permission to delete the webhook.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the webhook or team does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Webhook",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the webhook with the specified id installed on the given\nteam account.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/hooks/%7Buid%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The installed webhook's id.",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/hooks/{uid}",
+    "responses": {
+      "200": {
+        "description": "The webhook subscription object.",
+        "schema": {
+          "$ref": "#/definitions/webhook_subscription"
+        }
+      },
+      "404": {
+        "description": "If the webhook or team does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Webhook",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Updates the specified webhook subscription.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/hooks/%7Buid%7D#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "The installed webhook's id",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "uid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/hooks/{uid}",
+    "responses": {
+      "200": {
+        "description": "The webhook subscription object.",
+        "schema": {
+          "$ref": "#/definitions/webhook_subscription"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have permission to update the webhook.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the webhook or team does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Members",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "All members of a team.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/members#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/members",
+    "responses": {
+      "200": {
+        "description": "All members",
+        "examples": {
+          "application/json": {
+            "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+            "account_status": "active",
+            "display_name": "Example Username",
+            "links": {
+              "avatar": {
+                "href": "https://bitbucket.org/account/example-username/avatar/"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username"
+              }
+            },
+            "nickname": "example-username",
+            "type": "user",
+            "username": "example-username",
+            "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/user"
+        }
+      },
+      "404": {
+        "description": "When the team does not exist, or multiple teams with the same name exist that differ only in casing and the URL did not match the exact casing of a particular one.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Team Permissions",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns an object for each team permission a user on the team has.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/permissions#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " Name of a response property sort the result by as per [filtering and sorting](../../../meta/filtering#query-sort). ",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/permissions",
+    "responses": {
+      "200": {
+        "description": "Repositories owned by a team.",
+        "schema": {
+          "$ref": "#/definitions/paginated_team_permissions"
+        }
+      },
+      "403": {
+        "description": "The requesting user isn't an admin of the team.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Repository Permissions",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns an object for each repository permission for all of a\nteam’s repositories.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/permissions/repositories#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " Name of a response property sort the result by as per [filtering and sorting](../../../../meta/filtering#query-sort). ",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/permissions/repositories",
+    "responses": {
+      "200": {
+        "description": "Something something",
+        "schema": {
+          "$ref": "#/definitions/paginated_repository_permissions"
+        }
+      },
+      "403": {
+        "description": "The requesting user isn't an admin of the team.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Pipeline Variables",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Find account level variables.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/#get",
+    "method": "GET",
+    "operationId": "getPipelineVariablesForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/",
+    "responses": {
+      "200": {
+        "description": "The found account level variables.",
+        "schema": {
+          "$ref": "#/definitions/paginated_pipeline_variables"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Pipeline Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Create an account level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/#post",
+    "method": "POST",
+    "operationId": "createPipelineVariableForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The variable to create.",
+        "in": "body",
+        "name": "_body",
+        "required": false,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/",
+    "responses": {
+      "201": {
+        "description": "The created variable.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created pipeline variable.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "409": {
+        "description": "A variable with the provided key already exists.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Pipeline Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Delete a team level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#delete",
+    "method": "DELETE",
+    "operationId": "deletePipelineVariableForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to delete.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "204": {
+        "description": "The variable was deleted"
+      },
+      "404": {
+        "description": "The account or the variable with the provided UUID does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Pipeline Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieve a team level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#get",
+    "method": "GET",
+    "operationId": "getPipelineVariableForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable to retrieve.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or variable with the given UUID was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Pipeline Variable",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Update a team level variable.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#put",
+    "method": "PUT",
+    "operationId": "updatePipelineVariableForTeam",
+    "parameters": [
+      {
+        "description": "The account.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The UUID of the variable.",
+        "in": "path",
+        "name": "variable_uuid",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The updated variable.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      }
+    ],
+    "path": "/teams/{username}/pipelines_config/variables/{variable_uuid}",
+    "responses": {
+      "200": {
+        "description": "The variable was updated.",
+        "schema": {
+          "$ref": "#/definitions/pipeline_variable"
+        }
+      },
+      "404": {
+        "description": "The account or the variable was not found.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Projects",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/projects/#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/projects/",
+    "responses": {
+      "200": {
+        "description": "A paginated list of projects that belong to the specified team.",
+        "schema": {
+          "$ref": "#/definitions/paginated_projects"
+        }
+      },
+      "403": {
+        "description": "The requesting user isn't authorized to read the list of projects for the specified team.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "A team doesn't exist at this location.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Project",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new project.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/projects/#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/project"
+        }
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/projects/",
+    "responses": {
+      "201": {
+        "description": "A new project has been created.",
+        "headers": {
+          "Location": {
+            "description": "The location of the newly created project",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/project"
+        }
+      },
+      "403": {
+        "description": "The requesting user isn't authorized to create the project.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "A team doesn't exist at this location.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Project",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/projects/%7Bproject_key%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The project in question. This can either be the actual `key` assigned to the project or the `UUID` (surrounded by curly-braces (`{}`)). ",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/projects/{project_key}",
+    "responses": {
+      "204": {
+        "description": "Successful deletion."
+      },
+      "403": {
+        "description": "The requesting user isn't authorized to delete the project or the project isn't empty.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "A project isn't hosted at this location.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Project",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/projects/%7Bproject_key%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The project in question. This can either be the actual `key` assigned to the project or the `UUID` (surrounded by curly-braces (`{}`)). ",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/projects/{project_key}",
+    "responses": {
+      "200": {
+        "description": "The project object.",
+        "schema": {
+          "$ref": "#/definitions/project"
+        }
+      },
+      "403": {
+        "description": "The requesting user isn't authorized to access the project.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "A project isn't hosted at this location.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Project",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Since this endpoint can be used to both update and to create a\nproject, the request body depends on the intent.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/projects/%7Bproject_key%7D#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/project"
+        }
+      },
+      {
+        "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The project in question. This can either be the actual `key` assigned to the project or the `UUID` (surrounded by curly-braces (`{}`)). ",
+        "in": "path",
+        "name": "project_key",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/projects/{project_key}",
+    "responses": {
+      "200": {
+        "description": "The existing project is has been updated.",
+        "headers": {
+          "Location": {
+            "description": "The location of the project. This header is only provided\nwhen the project key is updated.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/project"
+        }
+      },
+      "201": {
+        "description": "A new project has been created.",
+        "headers": {
+          "Location": {
+            "description": "The location of the newly created project",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/project"
+        }
+      },
+      "403": {
+        "description": "The requesting user isn't authorized to update or create the project.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "A team doesn't exist at the location. Note that the project's absence from this location doesn't raise a 404, since a PUT at a non-existent location can be used to create a new project.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Repositories",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "All repositories owned by a user/team. This includes private\nrepositories, but filtered down to the ones that the calling user has\naccess to.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/repositories#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/teams/{username}/repositories",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Search Code",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/search/code#get",
+    "method": "GET",
+    "operationId": "searchAccount",
+    "parameters": [
+      {
+        "description": "The account to search in; either the username or the UUID in curly braces",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "The search query",
+        "in": "query",
+        "name": "search_query",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "default": 1,
+        "description": "Which page of the search results to retrieve",
+        "format": "int32",
+        "in": "query",
+        "name": "page",
+        "required": false,
+        "type": "integer"
+      },
+      {
+        "default": 10,
+        "description": "How many search results to retrieve per page",
+        "format": "int32",
+        "in": "query",
+        "name": "pagelen",
+        "required": false,
+        "type": "integer"
+      }
+    ],
+    "path": "/teams/{username}/search/code",
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "Successful search",
+        "schema": {
+          "$ref": "#/definitions/search_result_page"
+        }
+      },
+      "400": {
+        "description": "If the search request was invalid due to one of the following reasons:\n* the specified type of target account doesn't match the actual account type;\n* malformed pagination properties;\n* missing or malformed search query, in the latter case an error key will be returned in `error.data.key` property.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "Search is not enabled for the requested team, navigate to [https://bitbucket.org/search](https://bitbucket.org/search) to turn it on",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "429": {
+        "description": "Too many requests, try again later",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    },
+    "summary": "Search for code in the repositories of the specified team"
+  },
+  {
+    "apiName": "Get Members",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "All members of a team.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/members#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/members",
+    "responses": {
+      "200": {
+        "description": "All members",
+        "examples": {
+          "application/json": {
+            "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+            "account_status": "active",
+            "display_name": "Example Username",
+            "links": {
+              "avatar": {
+                "href": "https://bitbucket.org/account/example-username/avatar/"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username"
+              }
+            },
+            "nickname": "example-username",
+            "type": "user",
+            "username": "example-username",
+            "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/user"
+        }
+      },
+      "404": {
+        "description": "When the team does not exist, or multiple teams with the same name exist that differ only in casing and the URL did not match the exact casing of a particular one.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Repositories For User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "All repositories owned by a user/team. This includes private\nrepositories, but filtered down to the ones that the calling user has\naccess to.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/repositories#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/users/{username}/repositories",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

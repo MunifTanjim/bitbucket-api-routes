@@ -1,0 +1,62 @@
+{
+  "apiName": "Create Pipeline Schedule",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Create a schedule for the given repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/schedules/#post",
+  "method": "POST",
+  "operationId": "createRepositoryPipelineSchedule",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The schedule to create.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/pipeline_schedule"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/schedules/",
+  "responses": {
+    "201": {
+      "description": "The created schedule.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_schedule"
+      }
+    },
+    "400": {
+      "description": "There were errors validating the request.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "401": {
+      "description": "The maximum limit of schedules for this repository was reached.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The account or repository was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

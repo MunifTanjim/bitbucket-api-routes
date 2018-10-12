@@ -1,0 +1,53 @@
+{
+  "apiName": "List Commits For",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/commits/%7Brevision%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "revision",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}/{encoded_id}/commits/{revision}",
+  "responses": {
+    "200": {
+      "description": "The specified snippet commit.",
+      "schema": {
+        "$ref": "#/definitions/snippet_commit"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user does not have access to the snippet.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the commit or the snippet does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

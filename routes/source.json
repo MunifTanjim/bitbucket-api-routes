@@ -1,0 +1,299 @@
+[
+  {
+    "apiName": "List History",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a paginated list of commits that modified the specified file.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/filehistory/%7Bnode%7D/%7Bpath%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": " When `true`, Bitbucket will follow the history of the file across renames (this is the default behavior). This can be turned off by specifying `false`.",
+        "in": "query",
+        "name": "renames",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " Name of a response property sort the result by as per [filtering and sorting](../../../../../../meta/filtering#query-sort). ",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "node",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "query",
+        "name": "fields",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/filehistory/{node}/{path}",
+    "responses": {
+      "200": {
+        "description": "A paginated list of commits that modified the specified file",
+        "schema": {
+          "$ref": "#/definitions/paginated_files"
+        }
+      },
+      "404": {
+        "description": "If the repository does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Main Root",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "This endpoint redirects the client to the directory listing of the\nroot directory on the main branch.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/src#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "Instead of returning the file's contents, return the (json) meta data for it.",
+        "enum": [
+          "meta"
+        ],
+        "in": "query",
+        "name": "format",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/src",
+    "responses": {
+      "200": {
+        "description": "If the path matches a file, then the raw contents of the file are\nreturned (unless the `format=meta` query parameter was provided,\nin which case a json document containing the file's meta data is\nreturned). If the path matches a directory, then a paginated\nlist of file and directory entries is returned (if the\n`format=meta` query parameter was provided, then the json document\ncontaining the directory's meta data is returned).\n",
+        "schema": {
+          "$ref": "#/definitions/paginated_treeentries"
+        }
+      },
+      "404": {
+        "description": "If the path or commit in the URL does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create File Commit",
+    "consumes": [
+      "multipart/form-data",
+      "application/x-www-form-urlencoded"
+    ],
+    "description": "This endpoint is used to create new commits in the repository by\nuploading files.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/src#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The commit message. When omitted, Bitbucket uses a canned string.",
+        "in": "query",
+        "name": "message",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " The raw string to be used as the new commit's author. This string follows the format `Erik van Zijst <evzijst@atlassian.com>`.",
+        "in": "query",
+        "name": "author",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " A comma-separated list of SHA1s of the commits that should be the parents of the newly created commit.",
+        "in": "query",
+        "name": "parents",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " Optional field that declares the files that the request is manipulating. When adding a new file to a repo, or when overwriting an existing file, the client can just upload the full contents of the file in a normal form field and the use of this `files` meta data field is redundant. However, when the `files` field contains a file path that does not have a corresponding, identically-named form field, then Bitbucket interprets that as the client wanting to replace the named file with the null set and the file is deleted instead.",
+        "in": "query",
+        "name": "files",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " The name of the branch that the new commit should be created on. When omitted, the commit will be created on top of the main branch and will become the main branch's new HEAD/tip.",
+        "in": "query",
+        "name": "files",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " The name of the branch that the new commit should be created on. When omitted, the commit will be created on top of the main branch and will become the main branch's new head.",
+        "in": "query",
+        "name": "branch",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "body",
+        "name": "_body",
+        "required": true
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/src",
+    "responses": {
+      "200": {
+        "description": "\n"
+      },
+      "404": {
+        "description": "If the repository does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "This endpoints is used to retrieve the contents of a single file,\nor the contents of a directory at a specified revision.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/src/%7Bnode%7D/%7Bpath%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "If 'meta' is provided, returns the (json) meta data for the contents of the file.  If 'rendered' is provided, returns the contents of a non-binary file in HTML-formatted rendered markup. Since Git and Mercurial do not generally track what text encoding scheme is used, this endpoint attempts to detect the most appropriate character encoding. While usually correct, determining the character encoding can be ambiguous which in exceptional cases can lead to misinterpretation of the characters. As such, the raw element in the response object should not be treated as equivalent to the file's actual contents.",
+        "enum": [
+          "meta",
+          "rendered"
+        ],
+        "in": "query",
+        "name": "format",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "Optional filter expression as per [filtering and sorting](../../../../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "Optional sorting parameter as per [filtering and sorting](../../../../../../meta/filtering#query-sort).",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "node",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "repo_slug",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/repositories/{username}/{repo_slug}/src/{node}/{path}",
+    "responses": {
+      "200": {
+        "description": "If the path matches a file, then the raw contents of the file are\nreturned.  If the `format=meta` query parameter is provided,\na json document containing the file's meta data is\nreturned.  If the `format=rendered` query parameter is provided,\nthe contents of the file in HTML-formated rendered markup is returned.\nIf the path matches a directory, then a paginated\nlist of file and directory entries is returned (if the\n`format=meta` query parameter was provided, then the json document\ncontaining the directory's meta data is returned.)\n",
+        "schema": {
+          "$ref": "#/definitions/paginated_treeentries"
+        }
+      },
+      "404": {
+        "description": "If the path or commit in the URL does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

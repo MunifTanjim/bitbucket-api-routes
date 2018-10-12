@@ -1,0 +1,47 @@
+{
+  "apiName": "Get For User",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the webhook with the specified id installed on the given\nuser account.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/hooks/%7Buid%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "The installed webhook's id.",
+      "in": "path",
+      "name": "uid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "uid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/users/{username}/hooks/{uid}",
+  "responses": {
+    "200": {
+      "description": "The webhook subscription object.",
+      "schema": {
+        "$ref": "#/definitions/webhook_subscription"
+      }
+    },
+    "404": {
+      "description": "If the webhook or user does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

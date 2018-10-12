@@ -1,0 +1,66 @@
+[
+  {
+    "apiName": "Get All Subject Types",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the webhook resource or subject types on which webhooks can\nbe registered.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/hook_events#get",
+    "method": "GET",
+    "parameters": [],
+    "path": "/hook_events",
+    "responses": {
+      "200": {
+        "description": "A mapping of resource/subject types pointing to their individual event types.",
+        "schema": {
+          "$ref": "#/definitions/subject_types"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns a paginated list of all valid webhook events for the\nspecified entity.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/hook_events/%7Bsubject_type%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "A resource or subject type.",
+        "enum": [
+          "user",
+          "repository",
+          "team"
+        ],
+        "in": "path",
+        "name": "subject_type",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "subject_type",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/hook_events/{subject_type}",
+    "responses": {
+      "200": {
+        "description": "A paginated list of webhook types available to subscribe on.",
+        "schema": {
+          "$ref": "#/definitions/paginated_hook_events"
+        }
+      },
+      "404": {
+        "description": "If an invalid `{subject_type}` value was specified.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "apiName": "Delete Variable For Team",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Delete a team level variable.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#delete",
+  "method": "DELETE",
+  "operationId": "deletePipelineVariableForTeam",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the variable to delete.",
+      "in": "path",
+      "name": "variable_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/teams/{username}/pipelines_config/variables/{variable_uuid}",
+  "responses": {
+    "204": {
+      "description": "The variable was deleted"
+    },
+    "404": {
+      "description": "The account or the variable with the provided UUID does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

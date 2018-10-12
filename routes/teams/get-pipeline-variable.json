@@ -1,0 +1,41 @@
+{
+  "apiName": "Get Pipeline Variable",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve a team level variable.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/pipelines_config/variables/%7Bvariable_uuid%7D#get",
+  "method": "GET",
+  "operationId": "getPipelineVariableForTeam",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the variable to retrieve.",
+      "in": "path",
+      "name": "variable_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/teams/{username}/pipelines_config/variables/{variable_uuid}",
+  "responses": {
+    "200": {
+      "description": "The variable.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_variable"
+      }
+    },
+    "404": {
+      "description": "The account or variable with the given UUID was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

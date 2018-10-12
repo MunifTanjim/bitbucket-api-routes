@@ -1,0 +1,19 @@
+{
+  "apiName": "Get All Subject Types",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the webhook resource or subject types on which webhooks can\nbe registered.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/hook_events#get",
+  "method": "GET",
+  "parameters": [],
+  "path": "/hook_events",
+  "responses": {
+    "200": {
+      "description": "A mapping of resource/subject types pointing to their individual event types.",
+      "schema": {
+        "$ref": "#/definitions/subject_types"
+      }
+    }
+  }
+}

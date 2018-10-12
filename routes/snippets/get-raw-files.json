@@ -1,0 +1,56 @@
+{
+  "apiName": "Get Raw Files",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Convenience resource for getting to a snippet's raw files without the\nneed for first having to retrieve the snippet itself and having to pull\nout the versioned file links.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/files/%7Bpath%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "path",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}/{encoded_id}/files/{path}",
+  "responses": {
+    "302": {
+      "description": "A redirect to the most recent revision of the specified file.",
+      "headers": {
+        "Location": {
+          "description": "The URL of the most recent file revision.",
+          "type": "string"
+        }
+      }
+    },
+    "403": {
+      "description": "If the authenticated user does not have access to the snippet.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the snippet does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "apiName": "List Repository Permissions",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns an object for each repository the caller has explicit access\nto and their effective permission — the highest level of permission the\ncaller has. This does not return public repositories that the user was\nnot granted any specific permission in, and does not distinguish between\ndirect and indirect privileges.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/permissions/repositories#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": " Query string to narrow down the response as per [filtering and sorting](../../../meta/filtering).",
+      "in": "query",
+      "name": "q",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": " Name of a response property sort the result by as per [filtering and sorting](../../../meta/filtering#query-sort). ",
+      "in": "query",
+      "name": "sort",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "path": "/user/permissions/repositories",
+  "responses": {
+    "200": {
+      "description": "Repository permissions for the repositories a caller has explicit access to.",
+      "schema": {
+        "$ref": "#/definitions/paginated_repository_permissions"
+      }
+    }
+  }
+}

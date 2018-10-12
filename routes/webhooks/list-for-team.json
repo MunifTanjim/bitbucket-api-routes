@@ -1,0 +1,39 @@
+{
+  "apiName": "List For Team",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a paginated list of webhooks installed on this team.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/hooks#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/teams/{username}/hooks",
+  "responses": {
+    "200": {
+      "description": "The paginated list of installed webhooks.",
+      "schema": {
+        "$ref": "#/definitions/paginated_webhook_subscriptions"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user is not an admin on the specified team.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the specified team does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "apiName": "Update Build Number",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Update the next build number that should be assigned to a pipeline. The next build number that will be configured has to be strictly higher than the current latest build number for this repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/build_number#put",
+  "method": "PUT",
+  "operationId": "updateRepositoryBuildNumber",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The build number to update.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/pipeline_build_number"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/build_number",
+  "responses": {
+    "200": {
+      "description": "The build number has been configured.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_build_number"
+      }
+    },
+    "400": {
+      "description": "The update failed because the next number was invalid (it should be higher than the current number).",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "The account or repository was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

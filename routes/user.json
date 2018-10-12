@@ -1,0 +1,179 @@
+[
+  {
+    "apiName": "Get",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the currently logged in user.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user#get",
+    "method": "GET",
+    "parameters": [],
+    "path": "/user",
+    "responses": {
+      "200": {
+        "description": "The current user.",
+        "examples": {
+          "application/json": {
+            "account_id": "123456:daffbc08-1a80-4bd0-98bf-7997de0a3d10",
+            "account_status": "active",
+            "created_on": "2018-06-20T23:17:33.616037+00:00",
+            "display_name": "Example Username",
+            "is_staff": false,
+            "links": {
+              "avatar": {
+                "href": "https://bitbucket.org/account/example-username/avatar/"
+              },
+              "followers": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username/followers"
+              },
+              "following": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username/following"
+              },
+              "html": {
+                "href": "https://bitbucket.org/example-username/"
+              },
+              "repositories": {
+                "href": "https://api.bitbucket.org/2.0/repositories/example-username"
+              },
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/example-username"
+              },
+              "snippets": {
+                "href": "https://api.bitbucket.org/2.0/snippets/example-username"
+              }
+            },
+            "location": null,
+            "nickname": "example-username",
+            "type": "user",
+            "username": "example-username",
+            "uuid": "{58021780-82b6-4517-b153-0ae73ce3e4b4}",
+            "website": null
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/user"
+        }
+      },
+      "401": {
+        "description": "When the request wasn't authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Emails",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns all the authenticated user's email addresses. Both\nconfirmed and unconfirmed.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/emails#get",
+    "method": "GET",
+    "parameters": [],
+    "path": "/user/emails",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Email",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns details about a specific one of the authenticated user's\nemail addresses.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/emails/%7Bemail%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "email",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/user/emails/{email}",
+    "responses": {
+      "default": {
+        "description": "Unexpected error.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Repository Permissions",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns an object for each repository the caller has explicit access\nto and their effective permission — the highest level of permission the\ncaller has. This does not return public repositories that the user was\nnot granted any specific permission in, and does not distinguish between\ndirect and indirect privileges.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/permissions/repositories#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " Name of a response property sort the result by as per [filtering and sorting](../../../meta/filtering#query-sort). ",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "path": "/user/permissions/repositories",
+    "responses": {
+      "200": {
+        "description": "Repository permissions for the repositories a caller has explicit access to.",
+        "schema": {
+          "$ref": "#/definitions/paginated_repository_permissions"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Team Permissions",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns an object for each team the caller is a member of, and their\neffective role — the highest level of privilege the caller has. If a\nuser is a member of multiple groups with distinct roles, only the\nhighest level is returned.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/permissions/teams#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": " Query string to narrow down the response as per [filtering and sorting](../../../meta/filtering).",
+        "in": "query",
+        "name": "q",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": " Name of a response property sort the result by as per [filtering and sorting](../../../meta/filtering#query-sort). ",
+        "in": "query",
+        "name": "sort",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "path": "/user/permissions/teams",
+    "responses": {
+      "200": {
+        "description": "Team permissions for the teams a caller is a member of.",
+        "schema": {
+          "$ref": "#/definitions/paginated_team_permissions"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "apiName": "Get Branch Restriction",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a specific branch restriction rule.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/branch-restrictions/%7Bid%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The restriction rule's id",
+      "in": "path",
+      "name": "id",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/branch-restrictions/{id}",
+  "responses": {
+    "200": {
+      "description": "The branch restriction rule",
+      "schema": {
+        "$ref": "#/definitions/branchrestriction"
+      }
+    },
+    "401": {
+      "description": "If the request was not authenticated",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user does not have admin access to the repository",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the repository or branch restriction id does not exist",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

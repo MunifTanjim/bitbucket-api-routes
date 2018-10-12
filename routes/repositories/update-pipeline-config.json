@@ -1,0 +1,44 @@
+{
+  "apiName": "Update Pipeline Config",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Update the pipelines configuration for a repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config#put",
+  "method": "PUT",
+  "operationId": "updateRepositoryPipelineConfig",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The updated repository pipelines configuration.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/pipelines_config"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config",
+  "responses": {
+    "200": {
+      "description": "The repository pipelines configuration was updated.",
+      "schema": {
+        "$ref": "#/definitions/pipelines_config"
+      }
+    }
+  }
+}

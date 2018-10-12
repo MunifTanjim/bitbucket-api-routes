@@ -1,0 +1,38 @@
+{
+  "apiName": "List",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns all snippets. Like pull requests, repositories and teams, the\nfull set of snippets is defined by what the current user has access to.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "Filter down the result based on the authenticated user's role (`owner`, `contributor`, or `member`).",
+      "enum": [
+        "owner",
+        "contributor",
+        "member"
+      ],
+      "in": "query",
+      "name": "role",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets",
+  "responses": {
+    "200": {
+      "description": "A paginated list of snippets.",
+      "schema": {
+        "$ref": "#/definitions/paginated_snippets"
+      }
+    },
+    "404": {
+      "description": "If the snippet does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "apiName": "Update",
+  "consumes": [
+    "application/json",
+    "multipart/related",
+    "multipart/form-data"
+  ],
+  "description": "Used to update a snippet. Use this to add and delete files and to\nchange a snippet's title.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D#put",
+  "method": "PUT",
+  "parameters": [
+    {
+      "description": "The snippet's id.",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}/{encoded_id}",
+  "produces": [
+    "application/json",
+    "multipart/related",
+    "multipart/form-data"
+  ],
+  "responses": {
+    "200": {
+      "description": "The updated snippet object.",
+      "schema": {
+        "$ref": "#/definitions/snippet"
+      }
+    },
+    "401": {
+      "description": "If the snippet is private and the request was not authenticated.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "403": {
+      "description": "If authenticated user does not have permission to update the private snippet.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the snippet does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

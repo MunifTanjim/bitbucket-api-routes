@@ -1,0 +1,50 @@
+{
+  "apiName": "Get Ssh Key",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a specific SSH public key belonging to a user.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/ssh-keys/#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "The account's username or UUID.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The SSH key's UUID value.",
+      "in": "path",
+      "name": "key_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/users/{username}/ssh-keys/{key_id}",
+  "responses": {
+    "200": {
+      "description": "The specific SSH key matching the user and UUID",
+      "schema": {
+        "$ref": "#/definitions/ssh_account_key"
+      }
+    },
+    "403": {
+      "description": "If the specified user or key is not accessible to the current user"
+    },
+    "404": {
+      "description": "If the specified user or key does not exist",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

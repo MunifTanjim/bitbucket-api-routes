@@ -1,0 +1,46 @@
+{
+  "apiName": "List",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a paginated list of all repositories owned by the specified\naccount or UUID.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": " Filters the result based on the authenticated user's role on each repository.",
+      "enum": [
+        "admin",
+        "contributor",
+        "member",
+        "owner"
+      ],
+      "in": "query",
+      "name": "role",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}",
+  "responses": {
+    "200": {
+      "description": "The repositories owned by the specified account.",
+      "schema": {
+        "$ref": "#/definitions/paginated_repositories"
+      }
+    },
+    "404": {
+      "description": "If the specified account does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

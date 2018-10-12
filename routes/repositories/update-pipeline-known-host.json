@@ -1,0 +1,57 @@
+{
+  "apiName": "Update Pipeline Known Host",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Update a repository level known host.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/pipelines_config/ssh/known_hosts/%7Bknown_host_uuid%7D#put",
+  "method": "PUT",
+  "operationId": "updateRepositoryPipelineKnownHost",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The UUID of the known host to update.",
+      "in": "path",
+      "name": "known_host_uuid",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The updated known host.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/pipeline_known_host"
+      }
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/pipelines_config/ssh/known_hosts/{known_host_uuid}",
+  "responses": {
+    "200": {
+      "description": "The known host was updated.",
+      "schema": {
+        "$ref": "#/definitions/pipeline_known_host"
+      }
+    },
+    "404": {
+      "description": "The account, repository or known host with the given UUID was not found.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

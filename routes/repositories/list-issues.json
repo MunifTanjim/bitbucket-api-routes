@@ -1,0 +1,40 @@
+{
+  "apiName": "List Issues",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns the issues in the issue tracker.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/issues",
+  "responses": {
+    "200": {
+      "description": "A paginated list of the issues matching any filter criteria that were provided.",
+      "schema": {
+        "$ref": "#/definitions/paginated_issues"
+      }
+    },
+    "404": {
+      "description": "The specified repository does not exist or does not have the issue tracker enabled.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

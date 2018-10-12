@@ -1,0 +1,58 @@
+{
+  "apiName": "Create",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Creates a new webhook on the specified repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/hooks#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "body",
+      "name": "_body",
+      "required": true
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/hooks",
+  "responses": {
+    "201": {
+      "description": "If the webhook was registered successfully.",
+      "headers": {
+        "Location": {
+          "description": "The URL of new newly created webhook.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/webhook_subscription"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user does not have permission to install webhooks on the specified repository.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the repository does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

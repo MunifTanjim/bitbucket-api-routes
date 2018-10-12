@@ -1,0 +1,46 @@
+{
+  "apiName": "Check Watch",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Used to check if the current user is watching a specific snippet.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/watch#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "The snippet id.",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "encoded_id",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/snippets/{username}/{encoded_id}/watch",
+  "responses": {
+    "204": {
+      "schema": {
+        "$ref": ""
+      }
+    },
+    "404": {
+      "description": "If the snippet does not exist, or if the authenticated user is not watching the snippet.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

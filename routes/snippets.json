@@ -1,0 +1,1420 @@
+[
+  {
+    "apiName": "List",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns all snippets. Like pull requests, repositories and teams, the\nfull set of snippets is defined by what the current user has access to.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "Filter down the result based on the authenticated user's role (`owner`, `contributor`, or `member`).",
+        "enum": [
+          "owner",
+          "contributor",
+          "member"
+        ],
+        "in": "query",
+        "name": "role",
+        "required": false,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets",
+    "responses": {
+      "200": {
+        "description": "A paginated list of snippets.",
+        "schema": {
+          "$ref": "#/definitions/paginated_snippets"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new snippet under the authenticated user's account.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The new snippet object.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      }
+    ],
+    "path": "/snippets",
+    "responses": {
+      "201": {
+        "description": "The newly created snippet object.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created snippet.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      "401": {
+        "description": "If the request was not authenticated",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List For User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Identical to `/snippets`, except that the result is further filtered\nby the snippet owner and only those that are owned by `{username}` are\nreturned.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "Filter down the result based on the authenticated user's role (`owner`, `contributor`, or `member`).",
+        "enum": [
+          "owner",
+          "contributor",
+          "member"
+        ],
+        "in": "query",
+        "name": "role",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "description": "Limits the result to snippets owned by this user.",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}",
+    "responses": {
+      "200": {
+        "description": "A paginated list of snippets.",
+        "schema": {
+          "$ref": "#/definitions/paginated_snippets"
+        }
+      },
+      "404": {
+        "description": "If the user does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create For User",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Identical to `/snippets`, except that the new snippet will be\ncreated under the account specified in the path parameter `{username}`.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The new snippet object.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}",
+    "responses": {
+      "201": {
+        "description": "The newly created snippet object.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the newly created snippet.",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      "401": {
+        "description": "If the request was not authenticated",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have permission to create snippets under the specified account.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes a snippet and returns an empty response.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "The snippet's id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}",
+    "responses": {
+      "204": {
+        "description": "If the snippet was deleted successfully."
+      },
+      "401": {
+        "description": "If the snippet is private and the request was not authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If authenticated user does not have permission to delete the private snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieves a single snippet.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The snippet's id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}",
+    "produces": [
+      "application/json",
+      "multipart/related",
+      "multipart/form-data"
+    ],
+    "responses": {
+      "200": {
+        "description": "The snippet object.",
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      "401": {
+        "description": "If the snippet is private and the request was not authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If authenticated user does not have access to the private snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update",
+    "consumes": [
+      "application/json",
+      "multipart/related",
+      "multipart/form-data"
+    ],
+    "description": "Used to update a snippet. Use this to add and delete files and to\nchange a snippet's title.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "The snippet's id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}",
+    "produces": [
+      "application/json",
+      "multipart/related",
+      "multipart/form-data"
+    ],
+    "responses": {
+      "200": {
+        "description": "The updated snippet object.",
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      "401": {
+        "description": "If the snippet is private and the request was not authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If authenticated user does not have permission to update the private snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Comments",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Used to retrieve a paginated list of all comments for a specific\nsnippet.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/comments#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/comments",
+    "responses": {
+      "200": {
+        "description": "A paginated list of snippet comments, ordered by creation date.",
+        "schema": {
+          "$ref": "#/definitions/paginated_snippet_comments"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Create Comment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Creates a new comment.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/comments#post",
+    "method": "POST",
+    "parameters": [
+      {
+        "description": "The contents of the new comment.",
+        "in": "body",
+        "name": "_body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/comments",
+    "responses": {
+      "201": {
+        "description": "The newly created comment.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the new comment",
+            "type": "string"
+          }
+        },
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Comment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes a snippet comment.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/comments/%7Bcomment_id%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "comment_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/comments/{comment_id}",
+    "responses": {
+      "204": {
+        "description": "Indicates the comment was deleted successfully."
+      },
+      "403": {
+        "description": "If the authenticated user is not the author of the comment.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the comment or the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Comment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the specific snippet comment.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/comments/%7Bcomment_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "comment_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/comments/{comment_id}",
+    "responses": {
+      "200": {
+        "description": "The specified comment.",
+        "schema": {
+          "$ref": "#/definitions/snippet_comment"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the comment or snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Comment",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Updates a comment.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/comments/%7Bcomment_id%7D#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "comment_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/comments/{comment_id}",
+    "responses": {
+      "200": {
+        "description": "The updated comment object."
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the comment or snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Commits",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the changes (commits) made on this snippet.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/commits#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/commits",
+    "responses": {
+      "200": {
+        "description": "The paginated list of snippet commits.",
+        "schema": {
+          "$ref": "#/definitions/paginated_snippet_commit"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Commits For Revision",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/commits/%7Brevision%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "revision",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/commits/{revision}",
+    "responses": {
+      "200": {
+        "description": "The specified snippet commit.",
+        "schema": {
+          "$ref": "#/definitions/snippet_commit"
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the commit or the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Raw Files",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Convenience resource for getting to a snippet's raw files without the\nneed for first having to retrieve the snippet itself and having to pull\nout the versioned file links.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/files/%7Bpath%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/files/{path}",
+    "responses": {
+      "302": {
+        "description": "A redirect to the most recent revision of the specified file.",
+        "headers": {
+          "Location": {
+            "description": "The URL of the most recent file revision.",
+            "type": "string"
+          }
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Stop Watch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Used to stop watching a specific snippet. Returns 204 (No Content)\nto indicate success.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/watch#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "The snippet id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/watch",
+    "responses": {
+      "204": {
+        "schema": {
+          "$ref": ""
+        }
+      },
+      "401": {
+        "description": "If the request was not authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Check Watch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Used to check if the current user is watching a specific snippet.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/watch#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The snippet id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/watch",
+    "responses": {
+      "204": {
+        "schema": {
+          "$ref": ""
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist, or if the authenticated user is not watching the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Start Watch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Used to start watching a specific snippet. Returns 204 (No Content).",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/watch#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "The snippet id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/watch",
+    "responses": {
+      "204": {
+        "schema": {
+          "$ref": ""
+        }
+      },
+      "401": {
+        "description": "If the request was not authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "List Watchers",
+    "consumes": [
+      "application/json"
+    ],
+    "deprecated": true,
+    "description": "Returns a paginated list of all users watching a specific snippet.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/watchers#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The snippet id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/watchers",
+    "responses": {
+      "200": {
+        "description": "The paginated list of users watching this snippet",
+        "schema": {
+          "$ref": "#/definitions/paginated_users"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Delete Commit",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Deletes the snippet.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/%7Bnode_id%7D#delete",
+    "method": "DELETE",
+    "parameters": [
+      {
+        "description": "The snippet's id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "node_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/{node_id}",
+    "responses": {
+      "204": {
+        "description": "If the snippet was deleted successfully."
+      },
+      "401": {
+        "description": "If the snippet is private and the request was not authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If authenticated user does not have permission to delete the private snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "405": {
+        "description": "If `{node_id}` is not the latest revision.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Commit",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Identical to `GET /snippets/encoded_id`, except that this endpoint\ncan be used to retrieve the contents of the snippet as it was at an\nolder revision, while `/snippets/encoded_id` always returns the\nsnippet's current revision.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/%7Bnode_id%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The snippet's id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "A commit revision (SHA1).",
+        "in": "path",
+        "name": "node_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "node_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/{node_id}",
+    "produces": [
+      "application/json",
+      "multipart/related",
+      "multipart/form-data"
+    ],
+    "responses": {
+      "200": {
+        "description": "The snippet object.",
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      "401": {
+        "description": "If the snippet is private and the request was not authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If authenticated user does not have access to the private snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet, or the revision does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Update Commit",
+    "consumes": [
+      "application/json",
+      "multipart/related",
+      "multipart/form-data"
+    ],
+    "description": "Identical to `UPDATE /snippets/encoded_id`, except that this endpoint\ntakes an explicit commit revision. Only the snippet's \"HEAD\"/\"tip\"\n(most recent) version can be updated and requests on all other,\nolder revisions fail by returning a 405 status.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/%7Bnode_id%7D#put",
+    "method": "PUT",
+    "parameters": [
+      {
+        "description": "The snippet's id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "A commit revision (SHA1).",
+        "in": "path",
+        "name": "node_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "node_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/{node_id}",
+    "produces": [
+      "application/json",
+      "multipart/related",
+      "multipart/form-data"
+    ],
+    "responses": {
+      "200": {
+        "description": "The updated snippet object.",
+        "schema": {
+          "$ref": "#/definitions/snippet"
+        }
+      },
+      "401": {
+        "description": "If the snippet is private and the request was not authenticated.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "403": {
+        "description": "If authenticated user does not have permission to update the private snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet or the revision does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "405": {
+        "description": "If `{node_id}` is not the latest revision.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get File",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Retrieves the raw contents of a specific file in the snippet. The\n`Content-Disposition` header will be \"attachment\" to avoid issues with\nmalevolent executable files.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/%7Bnode_id%7D/files/%7Bpath%7D#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "path",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "node_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/{node_id}/files/{path}",
+    "responses": {
+      "200": {
+        "description": "Returns the contents of the specified file.",
+        "headers": {
+          "Content-Disposition": {
+            "description": "attachment",
+            "type": "string"
+          },
+          "Content-Type": {
+            "description": "The mime type as derived from the filename",
+            "type": "string"
+          }
+        }
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the file or snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Diff",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the diff of the specified commit against its first parent.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/%7Brevision%7D/diff#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "When used, only one the diff of the specified file will be returned.",
+        "in": "query",
+        "name": "path",
+        "type": "string"
+      },
+      {
+        "description": "The snippet id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "A revspec expression. This can simply be a commit SHA1, a ref name, or a compare expression like `staging..production`.",
+        "in": "path",
+        "name": "revision",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "revision",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/{revision}/diff",
+    "responses": {
+      "200": {
+        "description": "The raw diff contents."
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  },
+  {
+    "apiName": "Get Patch",
+    "consumes": [
+      "application/json"
+    ],
+    "description": "Returns the patch of the specified commit against its first\nparent.",
+    "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/snippets/%7Busername%7D/%7Bencoded_id%7D/%7Brevision%7D/patch#get",
+    "method": "GET",
+    "parameters": [
+      {
+        "description": "The snippet id.",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "A revspec expression. This can simply be a commit SHA1, a ref name, or a compare expression like `staging..production`.",
+        "in": "path",
+        "name": "revision",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "username",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "encoded_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "description": "",
+        "in": "path",
+        "name": "revision",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "path": "/snippets/{username}/{encoded_id}/{revision}/patch",
+    "responses": {
+      "200": {
+        "description": "The raw patch contents."
+      },
+      "403": {
+        "description": "If the authenticated user does not have access to the snippet.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      },
+      "404": {
+        "description": "If the snippet does not exist.",
+        "schema": {
+          "$ref": "#/definitions/error"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,55 @@
+{
+  "apiName": "Create Variable For User",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Create a user level variable.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/pipelines_config/variables/#post",
+  "method": "POST",
+  "operationId": "createPipelineVariableForUser",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The variable to create.",
+      "in": "body",
+      "name": "_body",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/pipeline_variable"
+      }
+    }
+  ],
+  "path": "/users/{username}/pipelines_config/variables/",
+  "responses": {
+    "201": {
+      "description": "The created variable.",
+      "headers": {
+        "Location": {
+          "description": "The URL of the newly created pipeline variable.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/pipeline_variable"
+      }
+    },
+    "404": {
+      "description": "The account does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "409": {
+      "description": "A variable with the provided key already exists.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

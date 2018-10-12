@@ -1,0 +1,73 @@
+{
+  "apiName": "Create Comment",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Creates new comment on the specified commit.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/comments#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the user, surrounded by curly-braces, for example: `{user UUID}`. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The specified comment.",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/commit_comment"
+      }
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The commit's SHA1.",
+      "in": "path",
+      "name": "node",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/commit/{node}/comments",
+  "responses": {
+    "201": {
+      "description": "The newly created comment.",
+      "headers": {
+        "Location": {
+          "description": "The location of the newly created comment.",
+          "type": "string"
+        }
+      }
+    },
+    "400": {
+      "description": "If the comment was detected as spam, or if the parent comment is not attached to the same node as the new comment"
+    },
+    "404": {
+      "description": "If a parent ID was passed in that cannot be found"
+    }
+  }
+}

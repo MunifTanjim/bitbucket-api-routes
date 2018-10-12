@@ -1,0 +1,49 @@
+{
+  "apiName": "Create Tag",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Creates a new tag in the specified repository.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/refs/tags#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/tag"
+      }
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/refs/tags",
+  "responses": {
+    "201": {
+      "description": "The newly created tag.",
+      "schema": {
+        "$ref": "#/definitions/tag"
+      }
+    },
+    "400": {
+      "description": "If the target hash is missing, ambiguous, or invalid, or if the name is not provided.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

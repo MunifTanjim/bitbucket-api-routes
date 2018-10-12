@@ -1,0 +1,48 @@
+{
+  "apiName": "Get Environment",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Retrieve an environment",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/environments/%7Benvironment_uuid%7D#get",
+  "method": "GET",
+  "operationId": "getEnvironmentForRepository",
+  "parameters": [
+    {
+      "description": "The account.",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The repository.",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The environment UUID.",
+      "in": "path",
+      "name": "environment_uuid",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/environments/{environment_uuid}",
+  "responses": {
+    "200": {
+      "description": "The environment.",
+      "schema": {
+        "$ref": "#/definitions/deployment_environment"
+      }
+    },
+    "404": {
+      "description": "No account, repository or environment with the UUID provided exists.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

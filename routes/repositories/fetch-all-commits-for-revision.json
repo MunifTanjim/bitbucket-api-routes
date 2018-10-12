@@ -1,0 +1,55 @@
+{
+  "apiName": "Fetch All Commits For Revision",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Identical to `GET /repositories/{username}/{repo_slug}/commits`,\nexcept that POST allows clients to place the include and exclude\nparameters in the request body to avoid URL length issues.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/commits/%7Brevision%7D#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "revision",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "This can either be the repository slug or the UUID of the repository, surrounded by curly-braces, for example: `{repository UUID}`. ",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "body",
+      "name": "include",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "body",
+      "name": "exclude",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/commits/{revision}",
+  "responses": {
+    "default": {
+      "description": "Unexpected error.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

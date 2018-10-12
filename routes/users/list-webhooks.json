@@ -1,0 +1,39 @@
+{
+  "apiName": "List Webhooks",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns a paginated list of webhooks installed on this user account.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/users/%7Busername%7D/hooks#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/users/{username}/hooks",
+  "responses": {
+    "200": {
+      "description": "The paginated list of installed webhooks.",
+      "schema": {
+        "$ref": "#/definitions/paginated_webhook_subscriptions"
+      }
+    },
+    "403": {
+      "description": "If the authenticated user is accessing an account other than their own.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "If the specified account does not exist.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

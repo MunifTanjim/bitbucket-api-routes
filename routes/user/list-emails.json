@@ -1,0 +1,19 @@
+{
+  "apiName": "List Emails",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns all the authenticated user's email addresses. Both\nconfirmed and unconfirmed.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/emails#get",
+  "method": "GET",
+  "parameters": [],
+  "path": "/user/emails",
+  "responses": {
+    "default": {
+      "description": "Unexpected error.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "apiName": "Create Issue Attachments",
+  "consumes": [
+    "multipart/form-data"
+  ],
+  "description": "Upload new issue attachments.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Busername%7D/%7Brepo_slug%7D/issues/%7Bissue_id%7D/attachments#post",
+  "method": "POST",
+  "parameters": [
+    {
+      "description": "The issue's id",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "integer"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "issue_id",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "repo_slug",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "body",
+      "name": "_body",
+      "required": true
+    }
+  ],
+  "path": "/repositories/{username}/{repo_slug}/issues/{issue_id}/attachments",
+  "responses": {
+    "201": {
+      "description": "An empty response document.",
+      "headers": {
+        "Location": {
+          "description": "The URL to the issue's collection of attachments.",
+          "type": "string"
+        }
+      }
+    },
+    "400": {
+      "description": "If no files were uploaded, or if the wrong `Content-Type` was used."
+    },
+    "401": {
+      "description": "If the issue tracker is private and the request was not authenticated."
+    },
+    "404": {
+      "description": "The specified repository or issue does not exist or does not have the issue tracker enabled.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

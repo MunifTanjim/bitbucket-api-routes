@@ -1,0 +1,73 @@
+{
+  "apiName": "Update For Team",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Since this endpoint can be used to both update and to create a\nproject, the request body depends on the intent.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/projects/%7Bproject_key%7D#put",
+  "method": "PUT",
+  "parameters": [
+    {
+      "description": "",
+      "in": "body",
+      "name": "_body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/project"
+      }
+    },
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": "The project in question. This can either be the actual `key` assigned to the project or the `UUID` (surrounded by curly-braces (`{}`)). ",
+      "in": "path",
+      "name": "project_key",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/teams/{username}/projects/{project_key}",
+  "responses": {
+    "200": {
+      "description": "The existing project is has been updated.",
+      "headers": {
+        "Location": {
+          "description": "The location of the project. This header is only provided\nwhen the project key is updated.",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/project"
+      }
+    },
+    "201": {
+      "description": "A new project has been created.",
+      "headers": {
+        "Location": {
+          "description": "The location of the newly created project",
+          "type": "string"
+        }
+      },
+      "schema": {
+        "$ref": "#/definitions/project"
+      }
+    },
+    "403": {
+      "description": "The requesting user isn't authorized to update or create the project.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    },
+    "404": {
+      "description": "A team doesn't exist at the location. Note that the project's absence from this location doesn't raise a 404, since a PUT at a non-existent location can be used to create a new project.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}

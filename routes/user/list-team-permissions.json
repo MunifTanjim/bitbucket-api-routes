@@ -1,0 +1,34 @@
+{
+  "apiName": "List Team Permissions",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns an object for each team the caller is a member of, and their\neffective role — the highest level of privilege the caller has. If a\nuser is a member of multiple groups with distinct roles, only the\nhighest level is returned.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/user/permissions/teams#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": " Query string to narrow down the response as per [filtering and sorting](../../../meta/filtering).",
+      "in": "query",
+      "name": "q",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": " Name of a response property sort the result by as per [filtering and sorting](../../../meta/filtering#query-sort). ",
+      "in": "query",
+      "name": "sort",
+      "required": false,
+      "type": "string"
+    }
+  ],
+  "path": "/user/permissions/teams",
+  "responses": {
+    "200": {
+      "description": "Team permissions for the teams a caller is a member of.",
+      "schema": {
+        "$ref": "#/definitions/paginated_team_permissions"
+      }
+    }
+  }
+}

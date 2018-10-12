@@ -1,0 +1,54 @@
+{
+  "apiName": "List Team Permissions",
+  "consumes": [
+    "application/json"
+  ],
+  "description": "Returns an object for each team permission a user on the team has.",
+  "documentationUrl": "https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/permissions#get",
+  "method": "GET",
+  "parameters": [
+    {
+      "description": "This can either be the username or the UUID of the account, surrounded by curly-braces, for example: `{account UUID}`. An account is either a team or user. ",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "description": " Query string to narrow down the response as per [filtering and sorting](../../../meta/filtering).",
+      "in": "query",
+      "name": "q",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": " Name of a response property sort the result by as per [filtering and sorting](../../../meta/filtering#query-sort). ",
+      "in": "query",
+      "name": "sort",
+      "required": false,
+      "type": "string"
+    },
+    {
+      "description": "",
+      "in": "path",
+      "name": "username",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "path": "/teams/{username}/permissions",
+  "responses": {
+    "200": {
+      "description": "Repositories owned by a team.",
+      "schema": {
+        "$ref": "#/definitions/paginated_team_permissions"
+      }
+    },
+    "403": {
+      "description": "The requesting user isn't an admin of the team.",
+      "schema": {
+        "$ref": "#/definitions/error"
+      }
+    }
+  }
+}
